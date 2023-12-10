@@ -62,15 +62,15 @@ const FeedbackSlider = () => {
   ]);
 
   return (
-    <div>
-      <div className="mx-auto container shadow ">
-        <div className="bg-[#292828] p-20">
+    <div className="py-20 ">
+      <div className="mx-auto container shadow  ">
+        <div className="bg-[#292828] px-20 py-10 rounded-lg">
           <h2 className="text-[32px] text-center font-bold text-primaryWhite">
             Let’s hear it from Our Clients
           </h2>
           <Slider {...settings}>
             {feedbacks.map((item, index) => (
-              <div key={index} className="p-20 text-primaryWhite">
+              <div key={index} className="px-20 pt-20 text-primaryWhite ">
                 <p
                   className={`text-2xl font-medium text-center ${raleway.className}`}
                 >

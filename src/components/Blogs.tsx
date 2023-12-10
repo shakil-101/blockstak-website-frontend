@@ -35,7 +35,7 @@ const Blogs = () => {
     },
   ]);
   return (
-    <div className="py-10">
+    <div className="py-20">
       <div className="container mx-auto">
         <div className="flex items-center justify-between pb-10">
           <h1 className="text-[32px] text-primaryWhite font-medium">Blog</h1>

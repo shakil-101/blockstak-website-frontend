@@ -1,0 +1,29 @@
+"use client";
+import React from "react";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Inter, Poppins } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const PrimaryLayout = ({ children }: any) => {
+  return (
+    <div
+      className={`bg-primaryDark min-h-screen text-primaryWhite ${poppins.className}`}
+    >
+      <ToastContainer position="top-center" />
+      <Header />
+      <main className="pt-[132px]">{children}</main>
+      <Footer />
+    </div>
+  );
+};
+
+export default PrimaryLayout;

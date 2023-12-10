@@ -6,6 +6,10 @@ import Banner from "@/components/Banner";
 import FeedbackSlider from "@/components/sliders/FeedbackSlider";
 import Blogs from "@/components/Blogs";
 import Projects from "@/components/Projects";
+import IntroductionSlider from "@/components/sliders/IntroductionSlider";
+import ContactForm from "@/components/ContactForm";
+import Locations from "@/components/Locations";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -15,15 +19,17 @@ const poppins = Poppins({
 
 export default function Home() {
   return (
-    <main
+    <div
       className={`bg-primaryDark min-h-screen text-primaryWhite ${poppins.className}`}
     >
-      <Header />
       <Banner />
+      <IntroductionSlider />
       <TechStack />
       <FeedbackSlider />
       <Projects />
       <Blogs />
-    </main>
+      <Locations />
+      <ContactForm />
+    </div>
   );
 }

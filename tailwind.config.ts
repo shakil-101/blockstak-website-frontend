@@ -20,6 +20,7 @@ const config: Config = {
         primaryDark: "#202020",
         primaryWhite: "#F4F4F4",
         primaryLight: "#8B80F9",
+        borderWhite: "#F9FAFB",
       },
     },
   },
