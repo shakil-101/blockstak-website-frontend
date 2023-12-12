@@ -11,13 +11,33 @@ html {
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
+
+/* ======== banner text background ========= */
 .float-bg {
   background: url("/float.svg");
-  background-position: bottom 3px right;
+  background-position: bottom right;
   background-repeat: no-repeat;
+  background-size: 100%;
 }
 
+/* ====== tech stack ========= */
+.techstack-white-bg {
+  background: url("/whiteBg.svg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 /* ====== slick slider arrow ========= */
+
+.slick-next {
+  right: -10px !important;
+}
+
+.slick-prev,
+.slick-next {
+  top: 42% !important;
+}
+
 .slick-prev:before,
 .slick-next:before {
   font-size: 35px !important;
@@ -30,13 +50,13 @@ html {
 }
 
 /* ====== locations ======= */
-.address-bg-center {
+.dhaka-address-bg {
   background: url("/skyline.svg");
   background-position: bottom center;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: contain;
 }
-.address-bg-right {
+.foreign-address-bg {
   background: url("/skyline.svg");
   background-position: bottom left;
   background-repeat: no-repeat;
@@ -78,4 +98,33 @@ html {
   stroke-dasharray: 90 207;
   stroke-dashoffset: -134;
   stroke-width: 6;
+}
+
+/* ====== Media query ======== */
+@media screen and (max-width: 767px) {
+  .slick-prev {
+    left: -30px !important;
+  }
+  .slick-next {
+    right: -25px !important;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px !important;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .dhaka-address-bg {
+    background-size: 150%;
+  }
+  .foreign-address-bg {
+    background-size: 150%;
+    background-position: bottom center;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px !important;
+  }
 }

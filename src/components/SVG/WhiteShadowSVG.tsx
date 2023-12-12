@@ -9,6 +9,7 @@ const WhiteShadow = () => {
         viewBox="0 0 591 195"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className=""
       >
         <path
           d="M307.512 0C143.509 0 0 0 0 0C0 105.415 133.569 195 297.572 195C461.575 195 591 105.415 591 0C591 0 471.516 0 307.512 0Z"

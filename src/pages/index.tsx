@@ -26,7 +26,7 @@ export default function Home() {
       <IntroductionSlider />
       <TechStack />
       <FeedbackSlider />
-      <Projects />
+      {/* <Projects /> */}
       <Blogs />
       <Locations />
       <ContactForm />

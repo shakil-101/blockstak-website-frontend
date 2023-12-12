@@ -4,11 +4,10 @@ const NpmSVG = () => {
   return (
     <div>
       <svg
-        width="79"
-        height="79"
         viewBox="0 0 79 79"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="sm:w-[79px] sm:h-[79px] w-[45px] h-[45px]"
       >
         <path
           d="M17.5555 17.5556H61.4444V61.4445H17.5555V17.5556Z"

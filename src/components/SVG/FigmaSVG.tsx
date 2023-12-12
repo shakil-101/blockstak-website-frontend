@@ -4,11 +4,10 @@ const FigmaSVG = () => {
   return (
     <div>
       <svg
-        width="79"
-        height="79"
         viewBox="0 0 79 79"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="sm:w-[79px] sm:h-[79px] w-[45px] h-[45px]"
       >
         <path
           d="M32.1852 61.4445C36.223 61.4445 39.5 58.1674 39.5 54.1297V46.8149H32.1852C28.1474 46.8149 24.8704 50.0919 24.8704 54.1297C24.8704 58.1674 28.1474 61.4445 32.1852 61.4445Z"

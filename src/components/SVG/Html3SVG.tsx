@@ -4,11 +4,10 @@ const Html3SVG = () => {
   return (
     <div>
       <svg
-        width="79"
-        height="79"
         viewBox="0 0 79 79"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="sm:w-[79px] sm:h-[79px] w-[45px] h-[45px]"
       >
         <path
           d="M58.8495 17.5556L55.3239 57.051L39.4763 61.4445L23.6724 57.0572L20.1505 17.5556H58.8495Z"

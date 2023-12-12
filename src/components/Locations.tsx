@@ -26,67 +26,89 @@ const Locations = () => {
   return (
     <div>
       <div className="container mx-auto">
-        <div className="address-bg-center text-center py-20">
-          <h1 className="text-[32px] font-bold pb-2">Dhaka</h1>
+        <div className="dhaka-address-bg text-center md:py-20 py-10">
+          <h1 className="md:text-[32px] sm:text-lg text-base font-bold pb-2">
+            Dhaka
+          </h1>
 
           <div className="pb-2">
-            <address className="text-xl font-medium not-italic">
+            <address className="md:text-xl sm:text-base text-sm md:font-medium not-italic">
               {dhaka.address}
             </address>
           </div>
 
           <div className="pb-2">
-            <a href={`mailto:${dhaka.email}`} className="text-xl font-medium">
+            <a
+              href={`mailto:${dhaka.email}`}
+              className="md:text-xl sm:text-base text-sm md:font-medium"
+            >
               {dhaka.email}
             </a>
           </div>
           <div className="">
-            <a href={`tel:${dhaka.phone}`} className="text-xl font-medium">
+            <a
+              href={`tel:${dhaka.phone}`}
+              className="md:text-xl sm:text-base text-sm md:font-medium"
+            >
               {dhaka.phone}
             </a>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-16">
-          <div className="address-bg-right py-20">
-            <h1 className="text-[32px] font-bold pb-2 ">San Jose</h1>
+        <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-16">
+          <div className="foreign-address-bg md:py-20 py-10 lg:text-start text-center">
+            <h1 className="md:text-[32px] sm:text-lg text-base font-bold pb-2 ">
+              San Jose
+            </h1>
 
             <div className="pb-2">
-              <address className="text-xl font-medium not-italic">
+              <address className="md:text-xl sm:text-base text-sm md:font-medium not-italic">
                 {sanJose.address}
               </address>
             </div>
 
-            <div className="pb-16">
+            <div className="lg:pb-16 pb-3">
               <a
                 href={`mailto:${sanJose.email}`}
-                className="text-xl font-medium"
+                className="md:text-xl sm:text-base text-sm md:font-medium"
               >
                 {sanJose.email}
               </a>
             </div>
             <div className="">
-              <a href={`tel:${sanJose.phone}`} className="text-xl font-medium">
+              <a
+                href={`tel:${sanJose.phone}`}
+                className="md:text-xl sm:text-base text-sm md:font-medium"
+              >
                 {sanJose.phone}
               </a>
             </div>
           </div>
-          <div className="address-bg-right py-20">
-            <h1 className="text-[32px] font-bold pb-2">Dubai</h1>
+
+          <div className="foreign-address-bg md:py-20 py-10 lg:text-start text-center ">
+            <h1 className="md:text-[32px] sm:text-lg text-base font-bold pb-2 ">
+              Dubai
+            </h1>
 
             <div className="pb-2">
-              <address className="text-xl font-medium not-italic">
+              <address className="md:text-xl sm:text-base text-sm md:font-medium not-italic">
                 {dubai.address}
               </address>
             </div>
 
-            <div className="pb-16">
-              <a href={`mailto:${dubai.email}`} className="text-xl font-medium">
+            <div className="lg:pb-16 pb-3">
+              <a
+                href={`mailto:${dubai.email}`}
+                className="md:text-xl sm:text-base text-sm md:font-medium"
+              >
                 {dubai.email}
               </a>
             </div>
             <div className="">
-              <a href={`tel:${dubai.phone}`} className="text-xl font-medium">
+              <a
+                href={`tel:${dubai.phone}`}
+                className="md:text-xl sm:text-base text-sm md:font-medium"
+              >
                 {dubai.phone}
               </a>
             </div>
