@@ -68,7 +68,7 @@ const IntroductionSlider = () => {
   };
 
   return (
-    <div className="py-20">
+    <div className="lg:py-20 py-10 border-t border-[#9CA3AF] lg:border-primaryDark">
       <div className="mx-auto container">
         <div className="">
           <div className="flex items-center justify-center lg:gap-10 sm:gap-3 gap-1.5">
@@ -140,7 +140,7 @@ const IntroductionSlider = () => {
 
                     <div className="lg:col-span-6 col-span-12 lg:order-1 order-2">
                       <h1
-                        className={`lg:text-[30px] text-base md:font-bold font-medium lg:pb-7 pb-3 `}
+                        className={`lg:text-[30px] text-base md:font-bold font-medium lg:pb-7 pb-3 leading-9`}
                       >
                         {item.title}
                       </h1>

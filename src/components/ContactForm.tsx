@@ -20,7 +20,7 @@ const ContactForm = () => {
     toast.success("Submission successful");
   };
   return (
-    <div id="contact-us" className="py-20 ">
+    <div id="contact-us" className="lg:py-20 py-10 ">
       <div className="container mx-auto">
         <div className="xl:px-[120px]">
           <h1 className={`sm:text-[35px] text-lg font-medium pb-6`}>

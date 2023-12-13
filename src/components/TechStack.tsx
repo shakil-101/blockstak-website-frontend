@@ -20,9 +20,9 @@ const raleway = Raleway({
 
 const TechStack = () => {
   return (
-    <div className="pb-20 ">
+    <div className="lg:py-20">
       <div className="container mx-auto">
-        <div className="border-t-2 relative techstack-white-bg ">
+        <div className="border-t border-[#9CA3AF] relative techstack-white-bg ">
           <h1
             className={` max-w-[500px] mx-auto sm:text-2xl text-sm text-[#F4F4F4] text-center sm:py-[50px] py-5 ${raleway.className}`}
           >

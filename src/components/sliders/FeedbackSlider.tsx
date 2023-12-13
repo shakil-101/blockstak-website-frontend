@@ -100,17 +100,17 @@ const FeedbackSlider = () => {
   };
 
   return (
-    <div className="py-20">
+    <div className="lg:py-20 py-10">
       <div className="container">
         <div className="bg-tertiaryDark lg:px-20 px-10  py-10 rounded-lg relative">
-          <h2 className="md:text-[32px] px-5 text-lg lg:text-center md:font-bold font-medium text-primaryWhite">
+          <h2 className="md:text-[32px] px-5 text-lg lg:text-center md:font-bold font-medium ">
             Let’s hear it from Our Clients
           </h2>
           <Slider {...settings}>
             {feedbacks.map((item, index) => (
               <div
                 key={index}
-                className="lg:px-20 sm:px-5 px-3  lg:pt-20 pt-10 text-primaryWhite "
+                className="lg:px-20 sm:px-5 px-3  lg:pt-20 pt-10  "
               >
                 <p
                   className={`min-h-[100px]  md:text-2xl text-sm font-medium lg:text-center ${raleway.className}`}

@@ -24,7 +24,7 @@ const Locations = () => {
   });
 
   return (
-    <div>
+    <div className="">
       <div className="container mx-auto">
         <div className="dhaka-address-bg text-center md:py-20 py-10">
           <h1 className="md:text-[32px] sm:text-lg text-base font-bold pb-2">

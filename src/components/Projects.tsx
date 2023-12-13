@@ -24,21 +24,20 @@ const Projects = () => {
       image: "/project1.png",
     },
   ]);
+
   return (
     <div className="py-20">
-      <div className="container mx-auto ">
+      <div className="container ">
         <div className="">
-          <h1 className={`text-[32px] font-medium ${raleway.className}`}>
-            Projects
+          <h1
+            className={`text-[42px] text-center font-semibold ${raleway.className}`}
+          >
+            Take a Look at our Work
           </h1>
 
           {allProjects.map((item, index) => (
-            <div key={index} className="grid grid-cols-12 gap-10 ">
+            <div key={index} className="grid grid-cols-12 gap-10 items-center ">
               <div className="col-span-5">
-                <p className={`text-[32px] font-medium pb-9`}>
-                  {index < 10 && 0}
-                  {index + 1}.
-                </p>
                 <h1 className={`text-[42px] font-semibold pb-6`}>
                   {item.title}
                 </h1>
@@ -50,7 +49,7 @@ const Projects = () => {
                 </div>
               </div>
               <div className="col-span-2"></div>
-              <div className="col-span-5  flex justify-end ">
+              <div className="col-span-5  flex justify-end  ">
                 <div
                   className="aspect-square"
                   style={{

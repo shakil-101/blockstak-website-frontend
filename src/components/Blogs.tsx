@@ -37,7 +37,7 @@ const Blogs = () => {
     },
   ]);
   return (
-    <div className="py-20">
+    <div className="lg:py-20 py-10">
       <div className="container mx-auto">
         <div className="flex items-center justify-between md:pb-10 ">
           <h1 className="md:text-[32px] text-lg text-primaryWhite font-medium">

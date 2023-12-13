@@ -10,6 +10,7 @@ import IntroductionSlider from "@/components/sliders/IntroductionSlider";
 import ContactForm from "@/components/ContactForm";
 import Locations from "@/components/Locations";
 import Footer from "@/components/Footer";
+import ProjectsSlider from "@/components/sliders/ProjectsSlider";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -26,6 +27,7 @@ export default function Home() {
       <IntroductionSlider />
       <TechStack />
       <FeedbackSlider />
+      <ProjectsSlider />
       {/* <Projects /> */}
       <Blogs />
       <Locations />

@@ -3,6 +3,8 @@ import React from "react";
 import { Poppins, Raleway } from "next/font/google";
 import Image from "next/image";
 import ArrowButton from "./buttons/ArrowButton";
+import RightArrowSVG from "./SVG/RightArrowSVG";
+import Link from "next/link";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -72,7 +74,21 @@ const Banner = () => {
           </div>
 
           <div className="flex justify-center pt-5">
-            <ArrowButton buttonText="Get in touch" />
+            <div className="lg:block hidden">
+              <ArrowButton buttonText="Get in touch" />
+            </div>
+            <Link href={`/`} className="lg:hidden">
+              <button className="group rounded-full flex items-center gap-2 bg-primaryLight hover:bg-primaryDark duration-300 px-3 py-1.5 border border-primaryDark hover:border-primaryWhite">
+                <p className="text-sm">Learn more</p>
+                <div className="w-fit group-hover:translate-x-2 duration-300">
+                  <RightArrowSVG
+                    width="24px"
+                    height="24px"
+                    fillColor="#F4F4F4"
+                  />
+                </div>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
