@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Poppins, Raleway } from "next/font/google";
 import Image from "next/image";
@@ -12,6 +12,8 @@ const raleway = Raleway({
 });
 
 const Banner = () => {
+  const [isLoading, setLoading] = useState(true);
+
   return (
     <div className="py-10 min-h-[90vh]  flex items-center justify-center">
       <div className="container mx-auto ">
@@ -24,14 +26,20 @@ const Banner = () => {
               width={110}
               height={110}
               alt="spiral image"
-              className="absolute -left-28 -top-1.5 md:block hidden"
+              className={`absolute -left-28 -top-1.5 md:block hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              })`}
+              onLoadingComplete={() => setLoading(false)}
             />
             <Image
               src="spiral.svg"
               width={60}
               height={600}
               alt="spiral image"
-              className="absolute -left-16 -top-3 md:hidden"
+              className={`absolute -left-16 -top-3 md:hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              })`}
+              onLoadingComplete={() => setLoading(false)}
             />
             Building in <span className="text-primary">stealth.</span>
             <Image
@@ -39,14 +47,20 @@ const Banner = () => {
               width={100}
               height={100}
               alt="box image"
-              className="absolute -right-28 top-0 md:block hidden"
+              className={`absolute -right-28 top-0 md:block hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              })`}
+              onLoadingComplete={() => setLoading(false)}
             />
             <Image
               src="box.svg"
               width={60}
               height={60}
               alt="box image"
-              className="absolute -right-16 top-1.5 md:hidden "
+              className={`absolute -right-16 top-1.5 md:hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              })`}
+              onLoadingComplete={() => setLoading(false)}
             />
           </h1>
           <div
@@ -62,14 +76,20 @@ const Banner = () => {
               width={120}
               height={100}
               alt="pie image"
-              className="mx-auto md:block hidden"
+              className={`mx-auto md:block hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              })`}
+              onLoadingComplete={() => setLoading(false)}
             />
             <Image
               src="pie.svg"
               width={70}
               height={70}
               alt="pie image"
-              className="mx-auto md:hidden "
+              className={`mx-auto md:hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              } `}
+              onLoadingComplete={() => setLoading(false)}
             />
           </div>
 
