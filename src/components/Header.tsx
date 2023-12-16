@@ -44,7 +44,7 @@ const Header = () => {
           <div>
             <Link href="/">
               <Image
-                className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert md:block hidden"
+                className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] md:block hidden"
                 src="/MainLogo.svg"
                 alt="Next.js Logo"
                 width={100}
@@ -52,7 +52,7 @@ const Header = () => {
                 priority
               />
               <Image
-                className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert md:hidden  "
+                className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] md:hidden  "
                 src="/MainLogo.svg"
                 alt="Next.js Logo"
                 width={50}
