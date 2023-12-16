@@ -17,6 +17,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [isOpened, setIsOpened] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const handleButtonClick = (e: any) => {
     e.preventDefault();
@@ -44,20 +45,26 @@ const Header = () => {
           <div>
             <Link href="/">
               <Image
-                className="relative md:block hidden"
+                className={`relative md:block hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              } `}
                 src="/MainLogo.svg"
                 alt="Next.js Logo"
                 width={100}
                 height={91}
                 priority
+                onLoadingComplete={() => setLoading(false)}
               />
               <Image
-                className="relative md:hidden  "
+                className={`relative md:hidden duration-700 ease-in-out ${
+                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+              }`}
                 src="/MainLogo.svg"
                 alt="Next.js Logo"
                 width={50}
                 height={91}
                 priority
+                onLoadingComplete={() => setLoading(false)}
               />
             </Link>
           </div>
