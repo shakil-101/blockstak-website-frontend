@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainLogo from "./SVG/MainLogoSVG";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,14 +10,21 @@ import HamburgerButton from "./buttons/HamburgerButton";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import RightArrowSVG from "./SVG/RightArrowSVG";
 import DownArrowSVG from "./SVG/DownArrowSVG";
+import { useRouter } from "next/router";
 
 const Header = () => {
-  const pathname = usePathname();
-  console.log(pathname);
+  const router = useRouter();
+
+  console.log({ router });
+  console.log(router.pathname);
+  console.log(router.query.id);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setLoading] = useState(true);
+  const [productDropdown, setProductDropdown] = useState(false);
+  const [dropdownHeight, setDropdownHeight] = useState("200px");
 
   const handleButtonClick = (e: any) => {
     e.preventDefault();
@@ -31,23 +38,31 @@ const Header = () => {
 
   const ref = useDetectClickOutside({ onTriggered: closeSideBar });
 
+  useEffect(() => {
+    if (productDropdown) {
+      setDropdownHeight("380px");
+    } else {
+      setDropdownHeight("200px");
+    }
+  }, [productDropdown]);
+
   return (
     <div
       ref={ref}
       className={`fixed top-0 left-0 w-full z-[100] py-5 duration-300 overflow-hidden ${
         isOpened
-          ? "h-[280px] bg-tertiaryDark"
-          : "md:h-[180px] h-[85px] bg-primaryDark"
+          ? `h-[${dropdownHeight}] bg-tertiaryDark`
+          : "md:h-[140px] h-[85px] bg-primaryDark"
       }`}
     >
-      <div className="container mx-auto">
+      <div className="container">
         <div className="flex items-center justify-between ">
           <div>
             <Link href="/">
               <Image
                 className={`relative md:block hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
-              } `}
+                  isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                } `}
                 src="/MainLogo.svg"
                 alt="Next.js Logo"
                 width={100}
@@ -57,8 +72,8 @@ const Header = () => {
               />
               <Image
                 className={`relative md:hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
-              }`}
+                  isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                }`}
                 src="/MainLogo.svg"
                 alt="Next.js Logo"
                 width={50}
@@ -84,7 +99,7 @@ const Header = () => {
                   <Link href={`/jobs`}>
                     <button
                       className={` hover:text-primaryLight text-xl font-medium duration-200 ${
-                        pathname.includes("jobs")
+                        router.pathname.includes("jobs")
                           ? "text-primaryLight"
                           : "text-white"
                       }`}
@@ -130,19 +145,64 @@ const Header = () => {
             </div>
           </Link>
 
-          <Link href={`/`}>
+          <div className="group ">
             <div
-              onClick={() => setIsOpened(false)}
-              className="flex items-center justify-between py-3 group"
+              onClick={() => {
+                setProductDropdown(!productDropdown);
+              }}
+              className={`flex items-center justify-between py-3 ${
+                productDropdown ? "underline" : "no-underline"
+              }`}
             >
-              <button className=" text-primaryWhite group-hover:text-primary  duration-200 text-left">
-                Products
-              </button>
-              <div className="">
+              <button className="text-left">Products</button>
+              <div
+                className={`${
+                  productDropdown ? "rotate-180" : "rotate-0"
+                } duration-200`}
+              >
                 <DownArrowSVG />
               </div>
             </div>
-          </Link>
+            <div
+              className={`${
+                productDropdown ? "h-[125px]" : "h-0"
+              } duration-300 overflow-hidden `}
+            >
+              <div className="py-2">
+                <button
+                  onClick={() => {
+                    setProductDropdown(!productDropdown);
+                  }}
+                  className="text-left pl-5"
+                >
+                  Product Development
+                </button>
+              </div>
+
+              <div className="py-2">
+                <button
+                  onClick={() => {
+                    setProductDropdown(!productDropdown);
+                    setDropdownHeight("380px");
+                  }}
+                  className="text-left pl-5"
+                >
+                  Artificial Intelligence
+                </button>
+              </div>
+              <div className="pt-2">
+                <button
+                  onClick={() => {
+                    setProductDropdown(!productDropdown);
+                    setDropdownHeight("380px");
+                  }}
+                  className="text-left pl-5"
+                >
+                  Data Solutions
+                </button>
+              </div>
+            </div>
+          </div>
 
           <Link href={`/jobs`}>
             <div

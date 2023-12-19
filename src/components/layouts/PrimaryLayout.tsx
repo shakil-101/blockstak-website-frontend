@@ -16,11 +16,11 @@ import "react-toastify/dist/ReactToastify.css";
 const PrimaryLayout = ({ children }: any) => {
   return (
     <div
-      className={`bg-primaryDark min-h-screen text-primaryWhite ${poppins.className}`}
+      className={`bg-primaryDark min-h-screen text-primaryWhite ${poppins.className} flex flex-col justify-between`}
     >
       <ToastContainer position="top-center" />
       <Header />
-      <main className="pt-[132px]">{children}</main>
+      <main className="pt-[140px] ">{children}</main>
       <Footer />
     </div>
   );

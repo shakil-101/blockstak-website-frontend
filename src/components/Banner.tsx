@@ -12,7 +12,9 @@ const raleway = Raleway({
 });
 
 const Banner = () => {
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading1, setLoading1] = useState(true);
+  const [isLoading2, setLoading2] = useState(true);
+  const [isLoading3, setLoading3] = useState(true);
 
   return (
     <div className="py-10 min-h-[90vh]  flex items-center justify-center">
@@ -27,9 +29,9 @@ const Banner = () => {
               height={110}
               alt="spiral image"
               className={`absolute -left-28 -top-1.5 md:block hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                isLoading1 ? " blur-2xl grayscale" : " blur-0 grayscale-0"
               })`}
-              onLoadingComplete={() => setLoading(false)}
+              onLoadingComplete={() => setLoading1(false)}
             />
             <Image
               src="spiral.svg"
@@ -37,9 +39,9 @@ const Banner = () => {
               height={600}
               alt="spiral image"
               className={`absolute -left-16 -top-3 md:hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                isLoading1 ? " blur-2xl grayscale" : " blur-0 grayscale-0"
               })`}
-              onLoadingComplete={() => setLoading(false)}
+              onLoadingComplete={() => setLoading1(false)}
             />
             Building in <span className="text-primary">stealth.</span>
             <Image
@@ -48,9 +50,9 @@ const Banner = () => {
               height={100}
               alt="box image"
               className={`absolute -right-28 top-0 md:block hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                isLoading2 ? " blur-2xl grayscale" : " blur-0 grayscale-0"
               })`}
-              onLoadingComplete={() => setLoading(false)}
+              onLoadingComplete={() => setLoading2(false)}
             />
             <Image
               src="box.svg"
@@ -58,9 +60,9 @@ const Banner = () => {
               height={60}
               alt="box image"
               className={`absolute -right-16 top-1.5 md:hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                isLoading2 ? " blur-2xl grayscale" : " blur-0 grayscale-0"
               })`}
-              onLoadingComplete={() => setLoading(false)}
+              onLoadingComplete={() => setLoading2(false)}
             />
           </h1>
           <div
@@ -77,9 +79,9 @@ const Banner = () => {
               height={100}
               alt="pie image"
               className={`mx-auto md:block hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                isLoading3 ? " blur-2xl grayscale" : " blur-0 grayscale-0"
               })`}
-              onLoadingComplete={() => setLoading(false)}
+              onLoadingComplete={() => setLoading3(false)}
             />
             <Image
               src="pie.svg"
@@ -87,9 +89,9 @@ const Banner = () => {
               height={70}
               alt="pie image"
               className={`mx-auto md:hidden duration-700 ease-in-out ${
-                isLoading ? " blur-2xl grayscale" : " blur-0 grayscale-0"
+                isLoading3 ? " blur-2xl grayscale" : " blur-0 grayscale-0"
               } `}
-              onLoadingComplete={() => setLoading(false)}
+              onLoadingComplete={() => setLoading3(false)}
             />
           </div>
 

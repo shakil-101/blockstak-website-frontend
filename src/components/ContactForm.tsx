@@ -20,7 +20,7 @@ const ContactForm = () => {
     toast.success("Submission successful");
   };
   return (
-    <div id="contact-us" className="lg:py-20 py-10 ">
+    <div id="contact-us" className="lg:py-20 py-10 bg-tertiaryDark">
       <div className="container mx-auto">
         <div className="xl:px-[120px]">
           <h1 className={`sm:text-[35px] text-lg font-medium pb-6`}>
@@ -36,7 +36,7 @@ const ContactForm = () => {
                   }
                   type="text"
                   placeholder="Your Name"
-                  className="bg-primaryDark border border-borderWhite w-full sm:p-5 p-3 rounded-md outline-primaryLight placeholder-primaryWhite sm:font-medium sm:text-xl text-sm"
+                  className="bg-transparent border border-borderWhite w-full sm:p-5 p-3 rounded-md outline-primaryLight placeholder-primaryWhite sm:font-medium sm:text-xl text-sm"
                 />
               </div>
               <div>
@@ -46,7 +46,7 @@ const ContactForm = () => {
                   }
                   type="email"
                   placeholder="Your Email"
-                  className="bg-primaryDark border border-borderWhite w-full sm:p-5 p-3 rounded-md outline-primaryLight placeholder-primaryWhite sm:font-medium sm:text-xl text-sm"
+                  className="bg-transparent border border-borderWhite w-full sm:p-5 p-3 rounded-md outline-primaryLight placeholder-primaryWhite sm:font-medium sm:text-xl text-sm"
                 />
               </div>
             </div>
@@ -58,7 +58,7 @@ const ContactForm = () => {
                 }
                 placeholder="Your Message"
                 rows={4}
-                className="bg-primaryDark border border-borderWhite w-full sm:p-5 p-3 rounded-md outline-primaryLight placeholder-primaryWhite sm:font-medium sm:text-xl text-sm"
+                className="bg-transparent border border-borderWhite w-full sm:p-5 p-3 rounded-md outline-primaryLight placeholder-primaryWhite sm:font-medium sm:text-xl text-sm"
               />
             </div>
             <div className="sm:flex justify-center">

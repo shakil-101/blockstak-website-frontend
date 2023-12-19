@@ -128,3 +128,15 @@ html {
     font-size: 25px !important;
   }
 }
+
+/* ======== test ======== */
+/* .btn:active {
+  background: #292828;
+}
+
+.btn:active:after {
+  background: transparent;
+}
+.glow-on-hover:hover:before {
+  opacity: 1;
+} */
