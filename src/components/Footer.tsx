@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="border-t border-[#575959] lg:py-[75px] py-[60px] bg-tertiaryDark">
+    <div className="border-t border-[#575959] lg:py-20 py-[60px] bg-tertiaryDark">
       <div className="container mx-auto">
         <div className="xl:px-[120px]">
           <div className="grid lg:grid-cols-2 grid-cols-1 items-center gap-5">
@@ -20,7 +20,7 @@ const Footer = () => {
               <div className="lg:text-start text-center ">
                 <a
                   href={`mailto: support@blockstak.ai`}
-                  className="text-2xl font-medium"
+                  className="text-2xl font-medium underline"
                 >
                   support@blockstak.ai
                 </a>

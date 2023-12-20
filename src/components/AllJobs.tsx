@@ -1,12 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocationSVG from "./SVG/LocationSVG";
 import RightArrowSVG from "./SVG/RightArrowSVG";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useDetectClickOutside } from "react-detect-click-outside";
+import DownArrowSVG from "./SVG/DownArrowSVG";
+
 const AllJobs = () => {
-  const [activeCategory, setActiveCategory] = useState<String>("All");
+  const [activeCategory, setActiveCategory] = useState<String>("");
+  const [selectedLocation, setSelectedLocation] = useState<String>("");
 
   const handleCategory = (category: string) => {
     setActiveCategory(category);
@@ -33,14 +37,83 @@ const AllJobs = () => {
     },
     {
       image: "/job1.png",
-      title: "Backend Developer",
+      title: "Frontend Developer",
       shortDescription:
         "We are looking for a Senior Backend Developer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
-      address: "Dhaka, Bangladesh",
-      location: "Dhaka",
+      address: "San Jose, USA",
+      location: "San Jose",
       category: "Dev",
     },
+    {
+      image: "/job1.png",
+      title: "UI/UX Designer",
+      shortDescription:
+        "We are looking for a UI/UX Designer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
+      address: "San Jose, USA",
+      location: "San Jose",
+      category: "Design",
+    },
+    {
+      image: "/job1.png",
+      title: "UI/UX Designer Intern",
+      shortDescription:
+        "We are looking for a UI/UX Designer Intern to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
+      address: "San Jose, USA",
+      location: "Dhaka",
+      category: "Design",
+    },
+    {
+      image: "/job1.png",
+      title: "Project Manager",
+      shortDescription:
+        "We are looking for a Project Manager Designer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
+      address: "San Jose, USA",
+      location: "San Jose",
+      category: "Managerial",
+    },
   ]);
+
+  const [displayJobs, setDisplayJobs] = useState<jobListType[]>([]);
+
+  const [isOpened, setIsOpened] = useState(false);
+  const closeSideBar = () => {
+    setIsOpened(false);
+  };
+
+  const ref = useDetectClickOutside({ onTriggered: closeSideBar });
+
+  useEffect(() => {
+    console.log({ activeCategory });
+    console.log({ selectedLocation });
+
+    if (activeCategory && !selectedLocation) {
+      const newArray = jobList.filter((job) => {
+        return job.category === activeCategory;
+      });
+      console.log("newArray", newArray);
+
+      setDisplayJobs(newArray);
+    } else if (!activeCategory && selectedLocation) {
+      const newArray = jobList.filter((job) => {
+        return job.location === selectedLocation;
+      });
+      console.log("newArray", newArray);
+
+      setDisplayJobs(newArray);
+    } else if (activeCategory && selectedLocation) {
+      const newArray = jobList.filter((job) => {
+        return (
+          job.category === activeCategory && job.location === selectedLocation
+        );
+      });
+      console.log("newArray", newArray);
+
+      setDisplayJobs(newArray);
+    } else {
+      setDisplayJobs(jobList);
+    }
+  }, [activeCategory, selectedLocation]);
+
   return (
     <div>
       <div className="">
@@ -53,13 +126,13 @@ const AllJobs = () => {
           professional adventure.
         </p>
 
-        <div className="py-10">
+        <div className="my-16">
           <div className="flex items-center justify-center gap-5 h-[59px]">
             <div className="max-w-[525px] rounded-full border border-primaryBorder flex items-center justify-between gap-3 px-3 py-2">
               <button
-                onClick={() => handleCategory("All")}
+                onClick={() => handleCategory("")}
                 className={`${
-                  activeCategory === "All"
+                  activeCategory === ""
                     ? "bg-tertiaryDark"
                     : "bg-primaryDark hover:bg-tertiaryDark "
                 }  rounded-full text-lg font-medium  px-5 h-[43px] duration-300`}
@@ -97,18 +170,61 @@ const AllJobs = () => {
                 Design
               </button>
             </div>
-            <div className="">
-              <select className=" rounded-full border bg-primaryDark border-primaryBorder px-5  h-[59px]">
-                <option value="">Location</option>
-                <option value="Dhaka">Dhaka</option>
-                <option value="San Jose">San Jose</option>
-              </select>
+            <div className="relative">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpened(!isOpened);
+                }}
+                className="w-[165px] h-[59px] px-6 cursor-pointer select-none flex items-center justify-between rounded-full border bg-primaryDark hover:bg-tertiaryDark border-primaryBorder "
+              >
+                <p className="select-none">
+                  {selectedLocation ? selectedLocation : "Location"}
+                </p>
+                <div className="">
+                  <DownArrowSVG />
+                </div>
+              </div>
+              <div
+                ref={ref}
+                className={`${
+                  isOpened ? "block " : "hidden"
+                } w-[165px] absolute top-16 left-0 border rounded-lg duration-200 bg-tertiaryDark z-[100] border-primaryBorder  overflow-hidden`}
+              >
+                <div
+                  onClick={() => {
+                    setSelectedLocation("");
+                    setIsOpened(!isOpened);
+                  }}
+                  className="cursor-pointer py-2 hover:bg-primaryDark  px-5"
+                >
+                  Location
+                </div>
+                <div
+                  onClick={() => {
+                    setSelectedLocation("Dhaka");
+                    setIsOpened(!isOpened);
+                  }}
+                  className="cursor-pointer py-2 hover:bg-primaryDark px-5"
+                >
+                  Dhaka
+                </div>
+                <div
+                  onClick={() => {
+                    setSelectedLocation("San Jose");
+                    setIsOpened(!isOpened);
+                  }}
+                  className="cursor-pointer py-2 hover:bg-primaryDark px-5"
+                >
+                  San Jose
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="py-10">
-          {jobList.map((item, index) => (
+        <div className="">
+          {displayJobs.map((item, index) => (
             <Link key={index} href={`jobs/${index}`}>
               <div
                 className={`${

@@ -1,3 +1,5 @@
+"use client";
+
 import CalendarSVG from "@/components/SVG/CalendarSVG";
 import CheckboxSVG from "@/components/SVG/CheckboxSVG";
 import DeleteSVG from "@/components/SVG/DeleteSVG";
@@ -138,7 +140,7 @@ const Application = () => {
               <div className="col-span-2">
                 <div
                   onClick={importImage}
-                  className="bg-[#2B2B2B] border-dashed border border-borderWhite p-6 rounded-lg cursor-pointer select-none"
+                  className="bg-[#2B2B2B] hover:bg-primaryDark border-dashed border border-borderWhite p-6 rounded-lg cursor-pointer select-none"
                 >
                   <div className="flex items-center gap-2.5 mb-3">
                     <FileSVG />
@@ -199,6 +201,7 @@ const Application = () => {
               </div>
               <div>
                 <button
+                  disabled={!acceptTerms}
                   className={`${
                     acceptTerms
                       ? "bg-primaryLight border-primaryLight"
