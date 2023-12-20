@@ -36,7 +36,7 @@ const Application = () => {
     lastName: "",
     email: "",
     number: "",
-    cv: "",
+    cv: null,
   });
 
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
@@ -46,23 +46,26 @@ const Application = () => {
     input.type = "file";
     input.accept = "application/pdf";
     input.onchange = () => {
-      const file = input.files[0];
-      console.log(file);
+      const fileInput = input.files;
 
-      // setSelectedImageFile(file);
-      // updateImage(file);
-      setFormData({ ...formData, cv: file });
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          // setSelectedImage(e.target.result);
-          // setUserInfo((prevInfo) => ({
-          //   ...prevInfo,
-          //   image: e.target.result,
-          // }));
-        };
-        reader.readAsDataURL(file);
+      if (fileInput && fileInput.length > 0) {
+        const file = fileInput[0];
+        console.log(file);
+
+        setFormData({ ...formData, cv: file });
       }
+
+      // if (file) {
+      //   const reader = new FileReader();
+      //   reader.onload = (e) => {
+      //     // setSelectedImage(e.target.result);
+      //     // setUserInfo((prevInfo) => ({
+      //     //   ...prevInfo,
+      //     //   image: e.target.result,
+      //     // }));
+      //   };
+      //   reader.readAsDataURL(file);
+      // }
     };
     input.click();
   };
