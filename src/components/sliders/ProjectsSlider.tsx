@@ -154,29 +154,31 @@ const ProjectsSlider = () => {
               ))}
             </Slider>
 
-            <div className="grid grid-cols-2 lg:block hidden">
-              <div></div>
-              <div className="flex items-center gap-6  justify-center">
-                <button
-                  onClick={slidePrev}
-                  className="bg-tertiaryDark  rounded-full p-2.5"
-                >
-                  <LeftArrowSVG
-                    width="24px"
-                    height="24px"
-                    fillColor="#C7C8FE"
-                  />
-                </button>
-                <button
-                  onClick={slideNext}
-                  className="bg-tertiaryDark p-2.5 rounded-full"
-                >
-                  <RightArrowSVG
-                    width="24px"
-                    height="24px"
-                    fillColor="#C7C8FE"
-                  />
-                </button>
+            <div className="lg:block hidden">
+              <div className="grid grid-cols-2 ">
+                <div></div>
+                <div className="flex items-center gap-6  justify-center">
+                  <button
+                    onClick={slidePrev}
+                    className="bg-tertiaryDark  rounded-full p-2.5"
+                  >
+                    <LeftArrowSVG
+                      width="24px"
+                      height="24px"
+                      fillColor="#C7C8FE"
+                    />
+                  </button>
+                  <button
+                    onClick={slideNext}
+                    className="bg-tertiaryDark p-2.5 rounded-full"
+                  >
+                    <RightArrowSVG
+                      width="24px"
+                      height="24px"
+                      fillColor="#C7C8FE"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
