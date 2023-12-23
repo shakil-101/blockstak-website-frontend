@@ -81,55 +81,57 @@ const Application = () => {
   return (
     <div className="bg-tertiaryDark py-[70px]">
       <div className="container">
-        <h1 className="text-[32px] font-medium mb-2 ">
+        <h1 className="lg:text-[32px] text-2xl font-medium mb-2 ">
           Title: {JobDetails.title}
         </h1>
 
-        <div className="flex items-center gap-5 mb-9">
+        <div className="flex items-center flex-wrap lg:gap-5 gap-3 mb-9">
           <div className="flex items-center gap-3">
             <CalendarSVG />
-            <p className="text-lg font-normal">
+            <p className="lg:text-lg font-normal">
               Deadline: {JobDetails.deadline}
             </p>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <LocationSVG />
-            <p className="text-lg font-normal">{JobDetails.address}</p>
+            <p className="lg:text-lg font-normal">{JobDetails.address}</p>
           </div>
         </div>
 
         <div>
-          <p className="text-2xl font-semibold mb-8">Personal Information</p>
+          <p className="lg:text-2xl text-lg font-semibold mb-8">
+            Personal Information
+          </p>
 
           <form onSubmit={submitForm}>
             <div className="grid grid-cols-2 gap-8">
-              <div>
-                <p className="font-medium mb-2">First Name</p>
+              <div className="lg:col-span-1 col-span-2">
+                <p className="lg:font-medium mb-2">First Name</p>
                 <input
                   required
                   type="text"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
                 />
               </div>
-              <div>
-                <p className="font-medium mb-2">Last Name</p>
+              <div className="lg:col-span-1 col-span-2">
+                <p className="lg:font-medium mb-2">Last Name</p>
                 <input
                   required
                   type="text"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
                 />
               </div>
-              <div>
-                <p className="font-medium mb-2">Email Address</p>
+              <div className="lg:col-span-1 col-span-2">
+                <p className="lg:font-medium mb-2">Email Address</p>
                 <input
                   required
                   type="email"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
                 />
               </div>
-              <div>
-                <p className="font-medium mb-2">Contact Number</p>
+              <div className="lg:col-span-1 col-span-2">
+                <p className="lg:font-medium mb-2">Contact Number</p>
                 <input
                   required
                   type="text"
@@ -140,11 +142,13 @@ const Application = () => {
               <div className="col-span-2">
                 <div
                   onClick={importImage}
-                  className="bg-[#2B2B2B] hover:bg-primaryDark border-dashed border border-borderWhite p-6 rounded-lg cursor-pointer select-none"
+                  className="bg-[#2B2B2B] hover:bg-primaryDark border-dashed border border-borderWhite md:p-6 p-4 rounded-lg cursor-pointer select-none"
                 >
                   <div className="flex items-center gap-2.5 mb-3">
                     <FileSVG />
-                    <h1 className="text-2xl font-semibold">Upload your CV</h1>
+                    <h1 className="sm:text-2xl text-lg font-semibold">
+                      Upload your CV
+                    </h1>
                   </div>
                   <p className="text-sm font-light text-secondaryWhite">
                     Only PDF files are allowed. File size should less than 5 MB.
@@ -182,7 +186,7 @@ const Application = () => {
                     {acceptTerms && <TikSVG />}
                   </div>
                 </div>
-                <p className="font-medium text-[22px]">
+                <p className="lg:font-medium lg:text-[22px]">
                   I accept that my contact information is handled according to
                   the{" "}
                   <Link href={`/`} className="text-primaryLight">
@@ -191,22 +195,22 @@ const Application = () => {
                 </p>
               </div>
 
-              <div>
+              <div className="lg:col-span-1 col-span-2">
                 <button
                   type="button"
-                  className="w-full h-[60px] border border-primaryLight hover:border-primaryGray rounded-lg text-lg font-medium "
+                  className="w-full lg:h-[60px] h-[42px] border border-primaryLight hover:border-primaryGray rounded-lg md:text-lg text-sm font-medium "
                 >
                   Save as Draft
                 </button>
               </div>
-              <div>
+              <div className="lg:col-span-1 col-span-2">
                 <button
                   disabled={!acceptTerms}
                   className={`${
                     acceptTerms
                       ? "bg-primaryLight border-primaryLight"
                       : "bg-primaryGray border-primaryGray cursor-not-allowed"
-                  } w-full h-[60px] border   rounded-lg text-lg font-medium `}
+                  } w-full lg:h-[60px] h-[42px] border rounded-lg md:text-lg text-sm font-medium `}
                 >
                   Apply Now
                 </button>

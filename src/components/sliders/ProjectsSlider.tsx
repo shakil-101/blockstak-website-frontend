@@ -11,6 +11,7 @@ import { Raleway } from "next/font/google";
 import ArrowButton from "../buttons/ArrowButton";
 import Link from "next/link";
 import RightArrowSVG from "../SVG/RightArrowSVG";
+import LeftArrowSVG from "../SVG/LeftArrowSVG";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -20,7 +21,7 @@ const ProjectsSlider = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -57,9 +58,14 @@ const ProjectsSlider = () => {
     },
   ]);
 
-  const goToSlide = (index: number) => {
+  const slideNext = () => {
     if (sliderRef.current) {
-      sliderRef.current.slickGoTo(index);
+      sliderRef.current.slickNext();
+    }
+  };
+  const slidePrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
     }
   };
 
@@ -68,17 +74,17 @@ const ProjectsSlider = () => {
       <div className="container">
         <div className="">
           <h1
-            className={`md:text-[42px] text-lg lg:text-center md:font-semibold font-medium text-center ${raleway.className}`}
+            className={`mb-6 md:text-[42px] text-lg lg:text-center md:font-semibold font-medium text-center ${raleway.className}`}
           >
             Take a Look at our Work
           </h1>
 
           <div className="">
-            <Slider ref={sliderRef} {...settings}>
+            <Slider ref={sliderRef} {...settings} className="">
               {feedbacks.map((item, index) => (
                 <div key={index} className="">
                   <div className="grid grid-cols-12 lg:gap-6 px-1 items-center ">
-                    <div className="lg:col-span-6 col-span-12 flex lg:justify-end justify-center lg:order-2 order-1 ">
+                    <div className="lg:col-span-6 col-span-12 flex justify-center lg:order-2 order-1 ">
                       <div
                         className="aspect-square lg:block hidden "
                         style={{
@@ -147,6 +153,32 @@ const ProjectsSlider = () => {
                 </div>
               ))}
             </Slider>
+
+            <div className="grid grid-cols-2 lg:block hidden">
+              <div></div>
+              <div className="flex items-center gap-6  justify-center">
+                <button
+                  onClick={slidePrev}
+                  className="bg-tertiaryDark  rounded-full p-2.5"
+                >
+                  <LeftArrowSVG
+                    width="24px"
+                    height="24px"
+                    fillColor="#C7C8FE"
+                  />
+                </button>
+                <button
+                  onClick={slideNext}
+                  className="bg-tertiaryDark p-2.5 rounded-full"
+                >
+                  <RightArrowSVG
+                    width="24px"
+                    height="24px"
+                    fillColor="#C7C8FE"
+                  />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

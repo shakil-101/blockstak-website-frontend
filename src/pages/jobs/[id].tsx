@@ -72,28 +72,28 @@ const JobDetails = () => {
       <div className="bg-tertiaryDark py-20">
         <div className="container">
           <div className="grid grid-cols-12">
-            <div className="col-span-9">
-              <h1 className="text-[32px] font-medium pb-3">
+            <div className="lg:col-span-9 col-span-12">
+              <h1 className="lg:text-[32px] text-2xl font-medium pb-3">
                 Title: {JobDetails.title}
               </h1>
 
-              <div className="flex items-center gap-5">
+              <div className="flex items-center lg:gap-5 gap-3 flex-wrap ">
                 <div className="flex items-center gap-3">
                   <CalendarSVG />
-                  <p className="text-lg font-normal">
+                  <p className="lg:text-lg font-normal">
                     Deadline: {JobDetails.deadline}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <LocationSVG />
-                  <p className="text-lg font-normal">{JobDetails.address}</p>
+                  <p className="lg:text-lg font-normal">{JobDetails.address}</p>
                 </div>
               </div>
             </div>
-            <div className="col-span-3 ">
+            <div className="lg:col-span-3 col-span-12 lg:mt-0 mt-10">
               <Link href={`/application/${router.query.id}`}>
-                <div className="sm:flex justify-end">
+                <div className="lg:flex justify-end">
                   <button className="group sm:w-[210px]  w-full bg-primaryLight  sm:py-3.5 py-2 flex items-center justify-center gap-4 rounded border duration-300  border-primaryLight hover:bg-primaryDark hover:border-primaryWhite">
                     <span className="sm:text-xl text-lg sm:font-medium">
                       Submit
@@ -112,28 +112,28 @@ const JobDetails = () => {
           </div>
 
           <div className="border-t mt-6">
-            <h1 className="text-[28px] font-bold my-12">
+            <h1 className="lg:text-[28px] text-lg font-bold my-12">
               {JobDetails.heading}
             </h1>
 
             <div className="max-w-[945px]">
               {/* ======== looking for ======== */}
               <div className="mb-12">
-                <h1 className="text-[28px] font-bold pb-4">
+                <h1 className="lg:text-[28px] text-lg font-bold pb-4">
                   What we are looking for
                 </h1>
-                <p className="text-2xl font-normal leading-[35px]">
+                <p className="lg:text-2xl font-normal lg:leading-[35px]">
                   {JobDetails.lookingFor}
                 </p>
               </div>
 
               {/* ====== Responsibilities ====== */}
               <div className="mb-12">
-                <h1 className="text-[28px] font-bold pb-4">
+                <h1 className="lg:text-[28px] text-lg font-bold pb-4">
                   Key Responsibilities
                 </h1>
 
-                <ul className="list-disc text-2xl pl-6 leading-[35px]">
+                <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
                   {JobDetails.responsibilities.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -142,9 +142,11 @@ const JobDetails = () => {
 
               {/* ====== Qualifications ====== */}
               <div className="mb-12">
-                <h1 className="text-[28px] font-bold pb-4">Qualifications</h1>
+                <h1 className="lg:text-[28px] text-lg font-bold pb-4">
+                  Qualifications
+                </h1>
 
-                <ul className="list-disc text-2xl pl-6 leading-[35px]">
+                <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
                   {JobDetails.qualifications.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -153,11 +155,11 @@ const JobDetails = () => {
 
               {/* ====== Salary and Benefit ====== */}
               <div className="mb-12">
-                <h1 className="text-[28px] font-bold pb-4">
+                <h1 className="lg:text-[28px] text-lg font-bold pb-4">
                   Salary and Benefit
                 </h1>
 
-                <ul className="list-disc text-2xl pl-6 leading-[35px]">
+                <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
                   {JobDetails.salaryBenefit.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -166,8 +168,10 @@ const JobDetails = () => {
 
               {/* ====== Salary and Benefit ====== */}
               <div className="mb-12">
-                <h1 className="text-[28px] font-bold pb-4">About Us</h1>
-                <p className="text-2xl font-normal leading-[35px]">
+                <h1 className="lg:text-[28px] text-lg font-bold pb-4">
+                  About Us
+                </h1>
+                <p className="lg:text-2xl font-normal leading-[35px]">
                   {JobDetails.aboutUs}
                 </p>
               </div>
@@ -176,20 +180,20 @@ const JobDetails = () => {
               <div className="">
                 <div className="flex items-center gap-3 mb-4">
                   <LocationSVG />
-                  <p className="text-2xl font-semibold">
+                  <p className="lg:text-2xl font-semibold">
                     Office Location: {JobDetails.officeLocation}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-3 mb-4">
                   <ClockSVG />
-                  <p className="text-2xl font-semibold">
+                  <p className="lg:text-2xl font-semibold">
                     Working Hours: {JobDetails.workingHours}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <CalendarSVG />
-                  <p className="text-2xl font-semibold">
+                  <p className="lg:text-2xl font-semibold">
                     Working Days: {JobDetails.workingDays}
                   </p>
                 </div>

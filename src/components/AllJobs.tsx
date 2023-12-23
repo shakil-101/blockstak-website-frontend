@@ -75,12 +75,22 @@ const AllJobs = () => {
 
   const [displayJobs, setDisplayJobs] = useState<jobListType[]>([]);
 
-  const [isOpened, setIsOpened] = useState(false);
-  const closeSideBar = () => {
-    setIsOpened(false);
+  const [locationOpened, setLocationOpened] = useState(false);
+  const [categoryOpened, setCategoryOpened] = useState(false);
+
+  const closeLocationDropdown = () => {
+    setLocationOpened(false);
+  };
+  const closeCategoryDropdown = () => {
+    setCategoryOpened(false);
   };
 
-  const ref = useDetectClickOutside({ onTriggered: closeSideBar });
+  const locationRef = useDetectClickOutside({
+    onTriggered: closeLocationDropdown,
+  });
+  const categoryRef = useDetectClickOutside({
+    onTriggered: closeCategoryDropdown,
+  });
 
   useEffect(() => {
     console.log({ activeCategory });
@@ -117,68 +127,139 @@ const AllJobs = () => {
   return (
     <div>
       <div className="">
-        <h1 className="text-[32px] font-bold text-center">
+        <h1 className="sm:text-[32px] text-2xl sm:font-bold font-semibold text-center mb-3">
           Build Yourself with BlockStak
         </h1>
-        <p className="text-neutralBase text-lg font-medium max-w-[575px] mx-auto text-center">
+
+        <p className=" text-neutralBase text-lg font-medium max-w-[575px] mx-auto text-center">
           Your gateway to opportunities: Discover a world of possibilities with
           our diverse job listings. Connect, apply, and embark on your next
           professional adventure.
         </p>
 
-        <div className="my-16">
+        {/* ====== filter options ======== */}
+        <div className="lg:my-16 my-6">
           <div className="flex items-center justify-center gap-5 h-[59px]">
-            <div className="max-w-[525px] rounded-full border border-primaryBorder flex items-center justify-between gap-3 px-3 py-2">
-              <button
-                onClick={() => handleCategory("")}
-                className={`${
-                  activeCategory === ""
-                    ? "bg-tertiaryDark"
-                    : "bg-primaryDark hover:bg-tertiaryDark "
-                }  rounded-full text-lg font-medium  px-5 h-[43px] duration-300`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => handleCategory("Managerial")}
-                className={`${
-                  activeCategory === "Managerial"
-                    ? "bg-tertiaryDark"
-                    : "bg-primaryDark hover:bg-tertiaryDark"
-                }  rounded-full text-lg font-medium px-5 h-[43px] duration-300`}
-              >
-                Managerial
-              </button>
-              <button
-                onClick={() => handleCategory("Dev")}
-                className={`${
-                  activeCategory === "Dev"
-                    ? "bg-tertiaryDark"
-                    : "bg-primaryDark hover:bg-tertiaryDark"
-                }  rounded-full text-lg font-medium px-5 h-[43px] duration-300`}
-              >
-                Dev
-              </button>
-              <button
-                onClick={() => handleCategory("Design")}
-                className={`${
-                  activeCategory === "Design"
-                    ? "bg-tertiaryDark"
-                    : "bg-primaryDark hover:bg-tertiaryDark"
-                }  rounded-full text-lg font-medium px-5 h-[43px] duration-300 `}
-              >
-                Design
-              </button>
+            {/* ======= job category big screen ========= */}
+            <div className="lg:block hidden">
+              <div className="max-w-[525px] rounded-full border border-primaryBorder flex items-center justify-between gap-3 px-3 py-2">
+                <button
+                  onClick={() => handleCategory("")}
+                  className={`${
+                    activeCategory === ""
+                      ? "bg-tertiaryDark"
+                      : "bg-primaryDark hover:bg-tertiaryDark "
+                  }  rounded-full text-lg font-medium  px-5 h-[43px] duration-300`}
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => handleCategory("Managerial")}
+                  className={`${
+                    activeCategory === "Managerial"
+                      ? "bg-tertiaryDark"
+                      : "bg-primaryDark hover:bg-tertiaryDark"
+                  }  rounded-full text-lg font-medium px-5 h-[43px] duration-300`}
+                >
+                  Managerial
+                </button>
+                <button
+                  onClick={() => handleCategory("Dev")}
+                  className={`${
+                    activeCategory === "Dev"
+                      ? "bg-tertiaryDark"
+                      : "bg-primaryDark hover:bg-tertiaryDark"
+                  }  rounded-full text-lg font-medium px-5 h-[43px] duration-300`}
+                >
+                  Dev
+                </button>
+                <button
+                  onClick={() => handleCategory("Design")}
+                  className={`${
+                    activeCategory === "Design"
+                      ? "bg-tertiaryDark"
+                      : "bg-primaryDark hover:bg-tertiaryDark"
+                  }  rounded-full text-lg font-medium px-5 h-[43px] duration-300 `}
+                >
+                  Design
+                </button>
+              </div>
             </div>
+
+            {/* ======= job category small screen ========= */}
+            <div className="lg:hidden block relative">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+
+                  setCategoryOpened(!locationOpened);
+                }}
+                className="w-[125px] lg:h-[59px] h-[40px] px-3 cursor-pointer select-none flex items-center justify-between rounded-full border bg-primaryDark hover:bg-tertiaryDark border-primaryBorder "
+              >
+                <p className="lg:text-base sm:text-[14px] text-[12px]">
+                  {activeCategory ? activeCategory : "All"}
+                </p>
+                <div className="">
+                  <DownArrowSVG />
+                </div>
+              </div>
+
+              <div
+                ref={categoryRef}
+                className={`${
+                  categoryOpened ? "block " : "hidden"
+                }  w-[125px] absolute top-12 left-0 border rounded-lg duration-200 bg-tertiaryDark z-[100] border-primaryBorder  overflow-hidden`}
+              >
+                <div
+                  onClick={() => {
+                    setActiveCategory("");
+                    setCategoryOpened(!categoryOpened);
+                  }}
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark lg:px-5 px-3"
+                >
+                  All
+                </div>
+
+                <div
+                  onClick={() => {
+                    setActiveCategory("Managerial");
+                    setCategoryOpened(!categoryOpened);
+                  }}
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark lg:px-5 px-3"
+                >
+                  Managerial
+                </div>
+
+                <div
+                  onClick={() => {
+                    setActiveCategory("Dev");
+                    setCategoryOpened(!categoryOpened);
+                  }}
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark lg:px-5 px-3"
+                >
+                  Dev
+                </div>
+                <div
+                  onClick={() => {
+                    setActiveCategory("Design");
+                    setCategoryOpened(!categoryOpened);
+                  }}
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark lg:px-5 px-3"
+                >
+                  Design
+                </div>
+              </div>
+            </div>
+
             <div className="relative">
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsOpened(!isOpened);
+                  setLocationOpened(!locationOpened);
                 }}
-                className="w-[165px] h-[59px] px-6 cursor-pointer select-none flex items-center justify-between rounded-full border bg-primaryDark hover:bg-tertiaryDark border-primaryBorder "
+                className="lg:w-[165px] w-[115px] lg:h-[59px] h-[40px] px-3 cursor-pointer select-none flex items-center justify-between rounded-full border bg-primaryDark hover:bg-tertiaryDark border-primaryBorder "
               >
-                <p className="select-none">
+                <p className="lg:text-base sm:text-[14px] text-[12px]">
                   {selectedLocation ? selectedLocation : "Location"}
                 </p>
                 <div className="">
@@ -186,35 +267,35 @@ const AllJobs = () => {
                 </div>
               </div>
               <div
-                ref={ref}
+                ref={locationRef}
                 className={`${
-                  isOpened ? "block " : "hidden"
-                } w-[165px] absolute top-16 left-0 border rounded-lg duration-200 bg-tertiaryDark z-[100] border-primaryBorder  overflow-hidden`}
+                  locationOpened ? "block " : "hidden"
+                } lg:w-[165px] w-[115px] absolute lg:top-16 top-12 left-0 border rounded-lg duration-200 bg-tertiaryDark z-[100] border-primaryBorder  overflow-hidden`}
               >
                 <div
                   onClick={() => {
                     setSelectedLocation("");
-                    setIsOpened(!isOpened);
+                    setLocationOpened(!locationOpened);
                   }}
-                  className="cursor-pointer py-2 hover:bg-primaryDark  px-5"
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark  px-5"
                 >
                   Location
                 </div>
                 <div
                   onClick={() => {
                     setSelectedLocation("Dhaka");
-                    setIsOpened(!isOpened);
+                    setLocationOpened(!locationOpened);
                   }}
-                  className="cursor-pointer py-2 hover:bg-primaryDark px-5"
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark px-5"
                 >
                   Dhaka
                 </div>
                 <div
                   onClick={() => {
                     setSelectedLocation("San Jose");
-                    setIsOpened(!isOpened);
+                    setLocationOpened(!locationOpened);
                   }}
-                  className="cursor-pointer py-2 hover:bg-primaryDark px-5"
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark px-5"
                 >
                   San Jose
                 </div>
@@ -223,21 +304,22 @@ const AllJobs = () => {
           </div>
         </div>
 
+        {/* ====== jobs ======== */}
         <div className="">
           {displayJobs.map((item, index) => (
             <Link key={index} href={`jobs/${index}`}>
               <div
                 className={`${
                   index === 0 ? "border-y" : "border-b"
-                }  relative border-secondaryBorder group py-16`}
+                }  relative border-secondaryBorder group lg:py-16 py-8`}
               >
-                <div className="container grid grid-cols-12 gap-16 ">
-                  <div className="col-span-3 flex justify-end">
+                <div className="container grid grid-cols-12 lg:gap-16 lg:gap-y-0 gap-y-6 ">
+                  <div className="lg:col-span-3 col-span-12 flex lg:justify-end ">
                     <div className="relative overflow-hidden rounded ">
                       <Image
                         src={`${item.image}`}
-                        width={300}
-                        height={300}
+                        width={360}
+                        height={360}
                         alt={`${item.title}`}
                         className="rounded "
                       />
@@ -245,17 +327,17 @@ const AllJobs = () => {
                       <div className="absolute top-0 right-0 h-full w-full opacity-0 group-hover:opacity-100 duration-300 bg-gradient-to-tr from-transparent via-transparent to-[#6b45e67c]"></div>
                     </div>
                   </div>
-                  <div className="col-span-9 ">
+                  <div className="lg:col-span-9 col-span-12 ">
                     <div className="max-w-[625px] flex flex-col justify-between  h-full">
                       <div className="">
-                        <h1 className="text-[32px] font-bold pb-6 ">
+                        <h1 className="text-[32px] font-bold mb-6 ">
                           {item.title}
                         </h1>
                         <p className="text-xl font-medium text-neutralBase ">
                           {item.shortDescription}
                         </p>
                       </div>
-                      <div className="flex items-center gap-3 ">
+                      <div className="flex items-center gap-3 lg:mt-0 mt-6">
                         <LocationSVG />
                         <p className="text-lg font-normal">{item.address}</p>
                       </div>
@@ -263,15 +345,29 @@ const AllJobs = () => {
                   </div>
                 </div>
 
-                <div className="absolute top-0 right-0 h-full w-[105px] duration-300 flex items-center justify-center overflow-hidden">
-                  <div className="z-[100]">
+                <div className="lg:block hidden">
+                  <div className="absolute top-0 right-0 h-full w-[105px] duration-300 flex items-center justify-center overflow-hidden">
+                    <div className="z-[100]">
+                      <RightArrowSVG
+                        width="28px"
+                        height="28px"
+                        fillColor="#F4F4F4"
+                      />
+                    </div>
+                    <div className="absolute top-0 right-0 h-full w-0 group-hover:w-full duration-300  bg-[#6b45e6] z-0"></div>
+                  </div>
+                </div>
+
+                <div className="lg:hidden block mt-12">
+                  <div className="h-full gap-4 hover:gap-6 duration-300 flex items-center justify-center ">
+                    <p className="font-medium ">Apply Now</p>
+
                     <RightArrowSVG
                       width="28px"
                       height="28px"
                       fillColor="#F4F4F4"
                     />
                   </div>
-                  <div className="absolute top-0 right-0 h-full w-0 group-hover:w-full duration-300  bg-[#6b45e6] z-0"></div>
                 </div>
               </div>
             </Link>

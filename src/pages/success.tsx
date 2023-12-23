@@ -18,7 +18,7 @@ const Success = () => {
 
   return (
     <div>
-      <div className="container flex items-center justify-center ">
+      <div className="container flex items-center justify-center py-20 ">
         <Lottie
           className={`${
             hideLottie ? "hidden" : "block"
@@ -27,18 +27,18 @@ const Success = () => {
           loop={false}
           onComplete={handleAnimationComplete}
         />
-        <div className="max-w-[755px] min-h-[350px] bg-[#2E2E2E] p-[60px] rounded-lg ">
-          <h1 className="text-[32px] font-medium mb-6 ">
+        <div className="max-w-[755px] h-fit bg-[#2E2E2E] lg:p-[60px] p-10 rounded-lg ">
+          <h1 className="lg:text-[32px] text-2xl font-medium mb-6 ">
             Thank you for applying to this position!
           </h1>
-          <p className="text-2xl mb-6 ">
+          <p className="lg:text-2xl text-lg mb-6 ">
             We have successfully received your application. <br /> We will get
             back to you as soon as possible!
           </p>
           <div>
             <Link href={`/`}>
               <button
-                className={`bg-primaryLight border-primaryLight  w-full h-[60px] border   rounded-lg text-lg font-medium `}
+                className={`bg-primaryLight border-primaryLight  w-full lg:h-[60px] h-[42px] border  rounded-lg lg:text-lg font-medium `}
               >
                 Go Back
               </button>

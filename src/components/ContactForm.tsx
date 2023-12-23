@@ -23,7 +23,7 @@ const ContactForm = () => {
     <div id="contact-us" className="lg:pt-28 lg:pb-16 py-10 bg-tertiaryDark">
       <div className="container mx-auto">
         <div className="xl:px-[120px]">
-          <h1 className={`sm:text-[35px] text-lg font-medium pb-16`}>
+          <h1 className={`sm:text-[35px] text-lg font-medium lg:pb-16 pb-4`}>
             Let’s Start a Conversation
           </h1>
 
