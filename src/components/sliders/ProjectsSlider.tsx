@@ -12,6 +12,8 @@ import ArrowButton from "../buttons/ArrowButton";
 import Link from "next/link";
 import RightArrowSVG from "../SVG/RightArrowSVG";
 import LeftArrowSVG from "../SVG/LeftArrowSVG";
+import LeftArrow2SVG from "../SVG/LeftArrow2SVG";
+import RightArrow2SVG from "../SVG/RIghtArrow2SVG";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -84,7 +86,7 @@ const ProjectsSlider = () => {
               {feedbacks.map((item, index) => (
                 <div key={index} className="">
                   <div className="grid grid-cols-12 lg:gap-6 px-1 items-center ">
-                    <div className="lg:col-span-6 col-span-12 flex justify-center lg:order-2 order-1 ">
+                    <div className="lg:col-span-6 col-span-12 flex justify-center lg:order-2 order-1 relative">
                       <div
                         className="aspect-square lg:block hidden "
                         style={{
@@ -117,6 +119,28 @@ const ProjectsSlider = () => {
                           className=""
                         />
                       </div>
+
+                      <button
+                        onClick={slidePrev}
+                        className="absolute top-0 left-0 h-full"
+                      >
+                        <LeftArrow2SVG
+                          width="32px"
+                          height="32px"
+                          fillColor="#565C61"
+                        />
+                      </button>
+
+                      <button
+                        onClick={slideNext}
+                        className=" absolute top-0 right-0 h-full"
+                      >
+                        <RightArrow2SVG
+                          width="32px"
+                          height="32px"
+                          fillColor="#565C61"
+                        />
+                      </button>
                     </div>
 
                     <div className="lg:col-span-6 col-span-12 lg:order-1 order-2 ">

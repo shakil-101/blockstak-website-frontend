@@ -8,6 +8,9 @@ import Slider from "react-slick";
 import userImage from "../../../public/user.png";
 import Image from "next/image";
 import { Raleway } from "next/font/google";
+import LeftArrow2SVG from "../SVG/LeftArrow2SVG";
+import LeftArrowSVG from "../SVG/LeftArrowSVG";
+import RightArrow2SVG from "../SVG/RIghtArrow2SVG";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -17,6 +20,8 @@ const raleway = Raleway({
 // import { FontAwesomeIcon } from "fortawesome/react-fontawesome";
 
 const FeedbackSlider = () => {
+  const sliderRef = useRef<Slider>(null);
+
   type feedBackType = {
     message: string;
     name: string;
@@ -54,39 +59,6 @@ const FeedbackSlider = () => {
     },
   ]);
 
-  // const CustomArrowPrev = ({ onClick }: any) => (
-  //   <button className={`custom-prev-btn`} onClick={onClick}>
-  //     <svg
-  //       xmlns="http://www.w3.org/2000/svg"
-  //       width="35"
-  //       height="35"
-  //       viewBox="0 0 18 19"
-  //       fill="none"
-  //     >
-  //       <path
-  //         d="M8.121 9.92189L11.8335 13.6344L10.773 14.6949L6 9.92189L10.773 5.14888L11.8335 6.20938L8.121 9.92189Z"
-  //         fill="#565C61"
-  //       />
-  //     </svg>
-  //   </button>
-  // );
-  // const CustomArrowNext = ({ onClick }: any) => (
-  //   <button className={`custom-next-btn`} onClick={onClick}>
-  //     <svg
-  //       xmlns="http://www.w3.org/2000/svg"
-  //       width="35"
-  //       height="35"
-  //       viewBox="0 0 18 19"
-  //       fill="none"
-  //     >
-  //       <path
-  //         d="M9.879 9.92189L6.1665 13.6344L7.227 14.6949L12 9.92189L7.227 5.14888L6.1665 6.20938L9.879 9.92189Z"
-  //         fill="#565C61"
-  //       />
-  //     </svg>
-  //   </button>
-  // );
-
   const settings = {
     dots: false,
     infinite: true,
@@ -95,18 +67,29 @@ const FeedbackSlider = () => {
     slidesToScroll: 1,
     autoplay: true,
     pauseOnHover: true,
-    // prevArrow: <CustomArrowPrev />,
-    // nextArrow: <CustomArrowNext />,
+    prevArrow: <> </>,
+    nextArrow: <></>,
+  };
+
+  const slideNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+  const slidePrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
   };
 
   return (
     <div className="lg:py-20 py-10">
       <div className="container">
-        <div className="bg-tertiaryDark lg:px-20 px-10  py-10 rounded-lg relative">
-          <h2 className="md:text-[32px] px-5 text-lg lg:text-center md:font-bold font-medium ">
+        <div className="bg-tertiaryDark lg:px-20 px-8 py-10 rounded-lg relative">
+          <h2 className="md:text-[32px] px-3 text-lg lg:text-center md:font-bold font-medium">
             Let’s hear it from Our Clients
           </h2>
-          <Slider {...settings}>
+          <Slider ref={sliderRef} {...settings}>
             {feedbacks.map((item, index) => (
               <div
                 key={index}
@@ -140,6 +123,20 @@ const FeedbackSlider = () => {
               </div>
             ))}
           </Slider>
+
+          <button
+            onClick={slidePrev}
+            className=" absolute top-0 left-0 h-full  md:pl-5 pl-1"
+          >
+            <LeftArrow2SVG width="32px" height="32px" fillColor="#565C61" />
+          </button>
+
+          <button
+            onClick={slideNext}
+            className=" absolute top-0 right-0 h-full md:pr-5 pr-1"
+          >
+            <RightArrow2SVG width="32px" height="32px" fillColor="#565C61" />
+          </button>
         </div>
       </div>
     </div>
