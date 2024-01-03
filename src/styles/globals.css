@@ -140,3 +140,11 @@ html {
 .glow-on-hover:hover:before {
   opacity: 1;
 } */
+
+/* ====== footer ====== */
+.footer-bg {
+  background: url("/footer.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

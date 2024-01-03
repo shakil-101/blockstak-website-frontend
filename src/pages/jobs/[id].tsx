@@ -1,5 +1,6 @@
 "use client";
 import ContactForm from "@/components/ContactForm";
+import DisplayRichText from "@/components/DisplayRichText";
 import Locations from "@/components/Locations";
 import CalendarSVG from "@/components/SVG/CalendarSVG";
 import ClockSVG from "@/components/SVG/ClockSVG";
@@ -7,7 +8,12 @@ import LocationSVG from "@/components/SVG/LocationSVG";
 import RightArrowSVG from "@/components/SVG/RightArrowSVG";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+// import escapeHTML from "escape-html";
+import { Text } from "slate";
+import { formatDeadline } from "../../../utils/momentFormatter";
 
 const JobDetails = () => {
   type jobDetailsType = {
@@ -17,7 +23,7 @@ const JobDetails = () => {
     heading: string;
     lookingFor: string;
 
-    responsibilities: string[];
+    responsibility: any;
     qualifications: string[];
     salaryBenefit: string[];
     aboutUs: string;
@@ -27,7 +33,7 @@ const JobDetails = () => {
   };
 
   const [JobDetails, setJobDetails] = useState<jobDetailsType>({
-    title: "Title: Backend Developer (PYTHON)",
+    title: "Backend Developer (PYTHON)",
     deadline: "16 November, 2023",
     address: "Dhaka, Bangladesh",
     heading:
@@ -35,7 +41,7 @@ const JobDetails = () => {
     lookingFor:
       "We are seeking a skilled backend developer to join our team. The ideal candidate will design, implement, and maintain scalable and reliable backend systems. They will work closely with the frontend team to develop API endpoints, integrate with databases, and create efficient data processing workflows. You will be building products and solutions for emerging startups in Silicon Valley.",
 
-    responsibilities: [
+    responsibility: [
       "Design and develop scalable and reliable backend systems ",
       "Collaborate with the frontend team to define API endpoints and ensure seamless integration with frontend applications",
       "Work with NoSQL databases such as DynamoDB, MongoDB, and Redis to manage and process data efficiently",
@@ -67,6 +73,47 @@ const JobDetails = () => {
   });
 
   const router = useRouter();
+
+  type detailsType = {
+    url?: string;
+    title: string;
+    shortDescription: string;
+    deadline: string;
+    address?: string;
+    location: string;
+    category: string;
+    designation?: string;
+    lookingFor?: string;
+    responsibility: any;
+    qualification: any;
+    salaryBenefit: any;
+    createdAt?: string;
+    updatedAt?: string;
+    id?: string;
+  };
+
+  const [details, setDetails] = useState<detailsType>();
+
+  const fetchData = async (jobId: any) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`);
+      // if (!response.ok) {
+      //   toast.error("Network response was not ok");
+      // }
+      const data = await response.json();
+      console.log("fetch: ", data);
+      setDetails(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (router.query.id) {
+      fetchData(router.query.id);
+    }
+  }, [router]);
+
   return (
     <div className="">
       <div className="bg-tertiaryDark py-20">
@@ -74,20 +121,21 @@ const JobDetails = () => {
           <div className="grid grid-cols-12">
             <div className="lg:col-span-9 col-span-12">
               <h1 className="lg:text-[32px] text-2xl font-medium pb-3">
-                Title: {JobDetails.title}
+                Title: {details?.designation}
               </h1>
 
               <div className="flex items-center lg:gap-5 gap-3 flex-wrap ">
                 <div className="flex items-center gap-3">
                   <CalendarSVG />
                   <p className="lg:text-lg font-normal">
-                    Deadline: {JobDetails.deadline}
+                    Deadline:
+                    {formatDeadline(details?.deadline)}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <LocationSVG />
-                  <p className="lg:text-lg font-normal">{JobDetails.address}</p>
+                  <p className="lg:text-lg font-normal">{details?.address}</p>
                 </div>
               </div>
             </div>
@@ -123,7 +171,7 @@ const JobDetails = () => {
                   What we are looking for
                 </h1>
                 <p className="lg:text-2xl font-normal lg:leading-[35px]">
-                  {JobDetails.lookingFor}
+                  {details?.lookingFor}
                 </p>
               </div>
 
@@ -133,11 +181,16 @@ const JobDetails = () => {
                   Key Responsibilities
                 </h1>
 
-                <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
+                <div className="lg:text-2xl pl-6 leading-[35px]">
+                  {details?.responsibility && (
+                    <DisplayRichText richText={details.responsibility} />
+                  )}
+                </div>
+                {/* <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
                   {JobDetails.responsibilities.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
-                </ul>
+                </ul> */}
               </div>
 
               {/* ====== Qualifications ====== */}
@@ -146,11 +199,16 @@ const JobDetails = () => {
                   Qualifications
                 </h1>
 
-                <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
+                <div className=" lg:text-2xl pl-6 leading-[35px]">
+                  {details?.qualification && (
+                    <DisplayRichText richText={details.qualification} />
+                  )}
+                </div>
+                {/* <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
                   {JobDetails.qualifications.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
-                </ul>
+                </ul> */}
               </div>
 
               {/* ====== Salary and Benefit ====== */}
@@ -159,11 +217,16 @@ const JobDetails = () => {
                   Salary and Benefit
                 </h1>
 
-                <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
+                <div className=" lg:text-2xl pl-6 leading-[35px]">
+                  {details?.salaryBenefit && (
+                    <DisplayRichText richText={details.salaryBenefit} />
+                  )}
+                </div>
+                {/* <ul className="list-disc lg:text-2xl pl-6 leading-[35px]">
                   {JobDetails.salaryBenefit.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
-                </ul>
+                </ul> */}
               </div>
 
               {/* ====== Salary and Benefit ====== */}
@@ -181,7 +244,7 @@ const JobDetails = () => {
                 <div className="flex items-center gap-3 mb-4">
                   <LocationSVG />
                   <p className="lg:text-2xl font-semibold">
-                    Office Location: {JobDetails.officeLocation}
+                    Office Location: {JobDetails.address}
                   </p>
                 </div>
 
@@ -204,7 +267,7 @@ const JobDetails = () => {
       </div>
 
       <Locations />
-      <ContactForm />
+      {/* <ContactForm /> */}
     </div>
   );
 };

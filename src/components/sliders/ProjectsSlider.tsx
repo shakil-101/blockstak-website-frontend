@@ -13,7 +13,7 @@ import Link from "next/link";
 import RightArrowSVG from "../SVG/RightArrowSVG";
 import LeftArrowSVG from "../SVG/LeftArrowSVG";
 import LeftArrow2SVG from "../SVG/LeftArrow2SVG";
-import RightArrow2SVG from "../SVG/RIghtArrow2SVG";
+import RightArrow2SVG from "../SVG/RightArrow2SVG";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -122,7 +122,7 @@ const ProjectsSlider = () => {
 
                       <button
                         onClick={slidePrev}
-                        className="absolute top-0 left-0 h-full"
+                        className="absolute top-0 left-0 h-full lg:hidden"
                       >
                         <LeftArrow2SVG
                           width="32px"
@@ -133,7 +133,7 @@ const ProjectsSlider = () => {
 
                       <button
                         onClick={slideNext}
-                        className=" absolute top-0 right-0 h-full"
+                        className=" absolute top-0 right-0 h-full lg:hidden"
                       >
                         <RightArrow2SVG
                           width="32px"

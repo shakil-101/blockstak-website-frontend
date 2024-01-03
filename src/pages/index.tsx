@@ -31,7 +31,7 @@ export default function Home() {
       {/* <Projects /> */}
       <Blogs />
       <Locations />
-      <ContactForm />
+      {/* <ContactForm /> */}
     </div>
   );
 }

@@ -10,7 +10,7 @@ import Image from "next/image";
 import { Raleway } from "next/font/google";
 import LeftArrow2SVG from "../SVG/LeftArrow2SVG";
 import LeftArrowSVG from "../SVG/LeftArrowSVG";
-import RightArrow2SVG from "../SVG/RIghtArrow2SVG";
+import RightArrow2SVG from "../SVG/RightArrow2SVG";
 
 const raleway = Raleway({
   subsets: ["latin"],

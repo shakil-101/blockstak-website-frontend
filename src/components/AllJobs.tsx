@@ -7,6 +7,8 @@ import Link from "next/link";
 
 import { useDetectClickOutside } from "react-detect-click-outside";
 import DownArrowSVG from "./SVG/DownArrowSVG";
+import useSWR from "swr";
+import { toast } from "react-toastify";
 
 const AllJobs = () => {
   const [activeCategory, setActiveCategory] = useState<String>("");
@@ -17,61 +19,20 @@ const AllJobs = () => {
   };
 
   type jobListType = {
-    image: string;
+    url?: string;
     title: string;
     shortDescription: string;
     address: string;
     location: string;
     category: string;
+    designation: string;
+
+    createdAt?: string;
+    updatedAt?: string;
+    id?: string;
   };
 
-  const [jobList, setJobList] = useState<jobListType[]>([
-    {
-      image: "/job1.png",
-      title: "Backend Developer",
-      shortDescription:
-        "We are looking for a Senior Backend Developer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
-      address: "Dhaka, Bangladesh",
-      location: "Dhaka",
-      category: "Dev",
-    },
-    {
-      image: "/job1.png",
-      title: "Frontend Developer",
-      shortDescription:
-        "We are looking for a Senior Backend Developer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
-      address: "San Jose, USA",
-      location: "San Jose",
-      category: "Dev",
-    },
-    {
-      image: "/job1.png",
-      title: "UI/UX Designer",
-      shortDescription:
-        "We are looking for a UI/UX Designer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
-      address: "San Jose, USA",
-      location: "San Jose",
-      category: "Design",
-    },
-    {
-      image: "/job1.png",
-      title: "UI/UX Designer Intern",
-      shortDescription:
-        "We are looking for a UI/UX Designer Intern to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
-      address: "San Jose, USA",
-      location: "Dhaka",
-      category: "Design",
-    },
-    {
-      image: "/job1.png",
-      title: "Project Manager",
-      shortDescription:
-        "We are looking for a Project Manager Designer to join our team. You will be responsible for building the next generation of our applications. You will be working closely with our product team to build the best possible user experience ",
-      address: "San Jose, USA",
-      location: "San Jose",
-      category: "Managerial",
-    },
-  ]);
+  const [jobList, setJobList] = useState<jobListType[]>([]);
 
   const [displayJobs, setDisplayJobs] = useState<jobListType[]>([]);
 
@@ -91,6 +52,24 @@ const AllJobs = () => {
   const categoryRef = useDetectClickOutside({
     onTriggered: closeCategoryDropdown,
   });
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/jobs");
+      if (!response.ok) {
+        toast.error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log("fetch: ", data.docs);
+      setJobList(data.docs);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     console.log({ activeCategory });
@@ -122,7 +101,7 @@ const AllJobs = () => {
     } else {
       setDisplayJobs(jobList);
     }
-  }, [activeCategory, selectedLocation]);
+  }, [activeCategory, selectedLocation, jobList]);
 
   return (
     <div>
@@ -307,7 +286,7 @@ const AllJobs = () => {
         {/* ====== jobs ======== */}
         <div className="">
           {displayJobs.map((item, index) => (
-            <Link key={index} href={`jobs/${index}`}>
+            <Link key={index} href={`jobs/${item.id}`}>
               <div
                 className={`${
                   index === 0 ? "border-y" : "border-b"
@@ -317,11 +296,11 @@ const AllJobs = () => {
                   <div className="lg:col-span-3 col-span-12 flex lg:justify-end ">
                     <div className="relative overflow-hidden rounded ">
                       <Image
-                        src={`${item.image}`}
+                        src={`${item.url ? item.url : "/job1.png"}`}
                         width={360}
                         height={360}
-                        alt={`${item.title}`}
-                        className="rounded "
+                        alt={`${item.designation}`}
+                        className="rounded"
                       />
 
                       <div className="absolute top-0 right-0 h-full w-full opacity-0 group-hover:opacity-100 duration-300 bg-gradient-to-tr from-transparent via-transparent to-[#6b45e67c]"></div>
@@ -331,13 +310,13 @@ const AllJobs = () => {
                     <div className="max-w-[625px] flex flex-col justify-between  h-full">
                       <div className="">
                         <h1 className="text-[32px] font-bold mb-6 ">
-                          {item.title}
+                          {item.designation}
                         </h1>
                         <p className="text-xl font-medium text-neutralBase ">
                           {item.shortDescription}
                         </p>
                       </div>
-                      <div className="flex items-center gap-3 lg:mt-0 mt-6">
+                      <div className="flex items-center gap-3 lg:pt-0 pt-6">
                         <LocationSVG />
                         <p className="text-lg font-normal">{item.address}</p>
                       </div>

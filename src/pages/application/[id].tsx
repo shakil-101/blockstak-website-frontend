@@ -8,7 +8,9 @@ import LocationSVG from "@/components/SVG/LocationSVG";
 import TikSVG from "@/components/SVG/TikSVG";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { formatDeadline } from "../../../utils/momentFormatter";
+import { toast } from "react-toastify";
 
 const Application = () => {
   const router = useRouter();
@@ -19,11 +21,11 @@ const Application = () => {
     deadline: string;
     address: string;
   };
-  type formDataType = {
+  type inputDataType = {
     firstName: string;
     lastName: string;
     email: string;
-    number: string;
+    contactNumber: string;
     cv: any;
   };
 
@@ -33,63 +35,120 @@ const Application = () => {
     address: "Dhaka, Bangladesh",
   });
 
-  const [formData, setFormData] = useState<formDataType>({
+  const [inputData, setInputData] = useState<inputDataType>({
     firstName: "",
     lastName: "",
     email: "",
-    number: "",
+    contactNumber: "",
     cv: null,
   });
 
+  const [selectedFile, setSelectedFile] = useState<File>();
+
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
+  const [details, setDetails] = useState<detailsType>();
 
   const importImage = () => {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "application/pdf";
+    input.required = true;
     input.onchange = () => {
       const fileInput = input.files;
 
       if (fileInput && fileInput.length > 0) {
         const file = fileInput[0];
-        console.log(file);
+        console.log("input file----", file);
 
-        setFormData({ ...formData, cv: file });
+        setSelectedFile(file);
       }
-
-      // if (file) {
-      //   const reader = new FileReader();
-      //   reader.onload = (e) => {
-      //     // setSelectedImage(e.target.result);
-      //     // setUserInfo((prevInfo) => ({
-      //     //   ...prevInfo,
-      //     //   image: e.target.result,
-      //     // }));
-      //   };
-      //   reader.readAsDataURL(file);
-      // }
     };
     input.click();
   };
 
-  const submitForm = (e: any) => {
-    e.preventDefault();
-    console.log("form submitted");
-    router.push("/success");
+  type detailsType = {
+    url?: string;
+    title: string;
+    shortDescription: string;
+    deadline: string;
+    address?: string;
+    location: string;
+    category: string;
+    designation: string;
+    lookingFor?: string;
+    responsibility: any;
+    qualification: any;
+    salaryBenefit: any;
+    createdAt?: string;
+    updatedAt?: string;
+    id?: string;
   };
+
+  const fetchData = async (jobId: any) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`);
+      // if (!response.ok) {
+      //   toast.error("Network response was not ok");
+      // }
+      const data = await response.json();
+      console.log("fetch: ", data);
+      setDetails(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const submitForm = async (e: any) => {
+    e.preventDefault();
+    if (selectedFile) {
+      try {
+        const formData = new FormData();
+        formData.append("firstName", inputData.firstName);
+        formData.append("lastName", inputData.lastName);
+        formData.append("email", inputData.email);
+        formData.append("contactNumber", inputData.email);
+        formData.append("designation", details ? details.designation : "");
+        formData.append("file", selectedFile ? selectedFile : "");
+
+        const response = await fetch("http://localhost:3000/api/applications", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await response.json();
+        console.log("post res--: ", data);
+
+        if (!response.ok) {
+          toast.error("Network response was not ok");
+        } else {
+          // router.push("/success");
+        }
+      } catch (error: any) {
+        console.log("Error fetching data:", error);
+      }
+    } else {
+      toast.warning("Please Upload Your CV");
+    }
+  };
+
+  useEffect(() => {
+    if (router.query.id) {
+      fetchData(router.query.id);
+    }
+  }, [router]);
 
   return (
     <div className="bg-tertiaryDark py-[70px]">
       <div className="container">
         <h1 className="lg:text-[32px] text-2xl font-medium mb-2 ">
-          Title: {JobDetails.title}
+          Title: {details?.designation}
         </h1>
 
         <div className="flex items-center flex-wrap lg:gap-5 gap-3 mb-9">
           <div className="flex items-center gap-3">
             <CalendarSVG />
             <p className="lg:text-lg font-normal">
-              Deadline: {JobDetails.deadline}
+              Deadline: {formatDeadline(details?.deadline)}
             </p>
           </div>
 
@@ -109,6 +168,10 @@ const Application = () => {
               <div className="lg:col-span-1 col-span-2">
                 <p className="lg:font-medium mb-2">First Name</p>
                 <input
+                  onChange={(e) =>
+                    setInputData({ ...inputData, firstName: e.target.value })
+                  }
+                  value={inputData.firstName}
                   required
                   type="text"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
@@ -117,6 +180,10 @@ const Application = () => {
               <div className="lg:col-span-1 col-span-2">
                 <p className="lg:font-medium mb-2">Last Name</p>
                 <input
+                  onChange={(e) =>
+                    setInputData({ ...inputData, lastName: e.target.value })
+                  }
+                  value={inputData.lastName}
                   required
                   type="text"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
@@ -125,6 +192,10 @@ const Application = () => {
               <div className="lg:col-span-1 col-span-2">
                 <p className="lg:font-medium mb-2">Email Address</p>
                 <input
+                  onChange={(e) =>
+                    setInputData({ ...inputData, email: e.target.value })
+                  }
+                  value={inputData.email}
                   required
                   type="email"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
@@ -133,6 +204,13 @@ const Application = () => {
               <div className="lg:col-span-1 col-span-2">
                 <p className="lg:font-medium mb-2">Contact Number</p>
                 <input
+                  onChange={(e) =>
+                    setInputData({
+                      ...inputData,
+                      contactNumber: e.target.value,
+                    })
+                  }
+                  value={inputData.contactNumber}
                   required
                   type="text"
                   className="w-full h-[55px] px-3 bg-transparent border border-borderWhite rounded-lg outline-primaryLight"
@@ -155,14 +233,14 @@ const Application = () => {
                   </p>
                 </div>
 
-                {formData.cv && (
+                {selectedFile && (
                   <div className="px-5 py-3 bg-primaryDark flex gap-4 mt-4 rounded-lg items-center w-fit ">
                     <p className="text-sm font-extralight">
-                      {formData.cv.name}
+                      {selectedFile.name}
                     </p>
                     <div className="">
                       <button
-                        onClick={() => setFormData({ ...formData, cv: "" })}
+                        onClick={() => setSelectedFile(undefined)}
                         className="bg-red-500 hover:scale-110 duration-200 p-2 rounded-lg text-sm font-light"
                       >
                         <DeleteSVG />
