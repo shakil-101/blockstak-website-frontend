@@ -86,7 +86,9 @@ const Application = () => {
 
   const fetchData = async (jobId: any) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/${jobId}`
+      );
       // if (!response.ok) {
       //   toast.error("Network response was not ok");
       // }
@@ -110,10 +112,13 @@ const Application = () => {
         formData.append("designation", details ? details.designation : "");
         formData.append("file", selectedFile ? selectedFile : "");
 
-        const response = await fetch("http://localhost:3000/api/applications", {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         const data = await response.json();
         console.log("post res--: ", data);
@@ -121,7 +126,16 @@ const Application = () => {
         if (!response.ok) {
           toast.error("Network response was not ok");
         } else {
-          // router.push("/success");
+          router.push("/success");
+
+          setInputData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            contactNumber: "",
+            cv: null,
+          });
+          setSelectedFile(undefined);
         }
       } catch (error: any) {
         console.log("Error fetching data:", error);

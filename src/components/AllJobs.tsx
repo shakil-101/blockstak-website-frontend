@@ -55,7 +55,9 @@ const AllJobs = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/jobs");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs`
+      );
       if (!response.ok) {
         toast.error("Network response was not ok");
       }
@@ -296,7 +298,11 @@ const AllJobs = () => {
                   <div className="lg:col-span-3 col-span-12 flex lg:justify-end ">
                     <div className="relative overflow-hidden rounded ">
                       <Image
-                        src={`${item.url ? item.url : "/job1.png"}`}
+                        src={`${
+                          item.url
+                            ? `${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`
+                            : "/job1.png"
+                        }`}
                         width={360}
                         height={360}
                         alt={`${item.designation}`}

@@ -96,7 +96,9 @@ const JobDetails = () => {
 
   const fetchData = async (jobId: any) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/${jobId}`
+      );
       // if (!response.ok) {
       //   toast.error("Network response was not ok");
       // }

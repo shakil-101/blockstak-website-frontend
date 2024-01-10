@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -11,6 +11,7 @@ import { Raleway } from "next/font/google";
 import LeftArrow2SVG from "../SVG/LeftArrow2SVG";
 import LeftArrowSVG from "../SVG/LeftArrowSVG";
 import RightArrow2SVG from "../SVG/RightArrow2SVG";
+import { toast } from "react-toastify";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -23,39 +24,39 @@ const FeedbackSlider = () => {
   const sliderRef = useRef<Slider>(null);
 
   type feedBackType = {
-    message: string;
+    feedback: string;
     name: string;
     designation: string;
-    image: string;
+    url: string;
   };
   const [feedbacks, setFeedbacks] = useState<feedBackType[]>([
     {
-      message:
+      feedback:
         "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor",
       name: "Alak Deb",
       designation: "Founder of Stealth Start-up",
-      image: "/user.png",
+      url: "/user.png",
     },
     {
-      message:
+      feedback:
         "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process.",
       name: "Nayem Deb",
       designation: "Founder of Stealth Start-up",
-      image: "/user.png",
+      url: "/user.png",
     },
     {
-      message:
+      feedback:
         "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor",
       name: "Asif Deb",
       designation: "Founder of Stealth Start-up",
-      image: "/user.png",
+      url: "/user.png",
     },
     {
-      message:
+      feedback:
         "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process.",
       name: "Zahid Deb",
       designation: "Founder of Stealth Start-up",
-      image: "/user.png",
+      url: "/user.png",
     },
   ]);
 
@@ -82,6 +83,30 @@ const FeedbackSlider = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/clients`
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.log("res error", response);
+        // toast.error("Network response was not ok");
+      } else {
+        console.log("fetch: ", data.docs);
+        setFeedbacks(data.docs);
+      }
+      console.log("fetch: ", data.docs);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="lg:py-20 py-10">
       <div className="container">
@@ -98,13 +123,13 @@ const FeedbackSlider = () => {
                 <p
                   className={`min-h-[100px]  md:text-2xl text-sm font-medium lg:text-center ${raleway.className}`}
                 >
-                  {item.message}
+                  {item.feedback}
                 </p>
 
                 <div className="mx-auto lg:w-fit flex items-center gap-8 lg:pt-16 pt-8">
                   <div className="lg:block hidden">
                     <Image
-                      src={`${item.image}`}
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
                       width={90}
                       height={90}
                       alt={`${item.name}`}

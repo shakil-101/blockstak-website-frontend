@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -35,28 +35,28 @@ const ProjectsSlider = () => {
     },
   };
 
-  type feedBackType = {
+  type projectsType = {
     title: string;
     shortDescription: string;
-    category: string;
-    image: string;
+
+    url: string;
   };
   const sliderRef = useRef<Slider>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [feedbacks, setFeedbacks] = useState<feedBackType[]>([
+  const [projects, setProjects] = useState<projectsType[]>([
     {
       title: "Good Days",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur. Ac nec sem et lacus parturient viverra fermentum. Id purus adipiscing sed enim euismod ultrices odio ornare.",
-      category: "Product Development",
-      image: "/project1.png",
+
+      url: "/project1.png",
     },
     {
       title: "Good Days",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur. Ac nec sem et lacus parturient viverra fermentum. Id purus adipiscing sed enim euismod ultrices odio ornare.",
-      category: "Artificial Intelligence",
-      image: "/project1.png",
+
+      url: "/project1.png",
     },
   ]);
 
@@ -71,6 +71,30 @@ const ProjectsSlider = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/our-works`
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.log("res error", response);
+        // toast.error("Network response was not ok");
+      } else {
+        console.log("fetch: ", data.docs);
+        setProjects(data.docs);
+      }
+      console.log("fetch: ", data.docs);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="lg:py-20 py-10 ">
       <div className="container">
@@ -83,7 +107,7 @@ const ProjectsSlider = () => {
 
           <div className="">
             <Slider ref={sliderRef} {...settings} className="">
-              {feedbacks.map((item, index) => (
+              {projects.map((item, index) => (
                 <div key={index} className="">
                   <div className="grid grid-cols-12 lg:gap-6 px-1 items-center ">
                     <div className="lg:col-span-6 col-span-12 flex justify-center lg:order-2 order-1 relative">
@@ -96,7 +120,7 @@ const ProjectsSlider = () => {
                         }}
                       >
                         <Image
-                          src={`${item.image}`}
+                          src={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
                           layout="fill"
                           style={{ objectFit: "contain" }}
                           alt={item.title}
@@ -112,7 +136,7 @@ const ProjectsSlider = () => {
                         }}
                       >
                         <Image
-                          src={`${item.image}`}
+                          src={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
                           layout="fill"
                           style={{ objectFit: "contain" }}
                           alt={item.title}
