@@ -64,6 +64,7 @@ const ContactForm = () => {
             <div className="grid lg:grid-cols-2 grid-cols-1 sm:gap-10 gap-6 sm:pb-10 pb-6">
               <div>
                 <input
+                  required
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
@@ -75,6 +76,7 @@ const ContactForm = () => {
               </div>
               <div>
                 <input
+                  required
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
@@ -88,6 +90,7 @@ const ContactForm = () => {
 
             <div className="sm:pb-10 pb-6">
               <textarea
+                required
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
