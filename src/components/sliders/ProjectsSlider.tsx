@@ -105,12 +105,25 @@ const ProjectsSlider = () => {
             Take a Look at our Work
           </h1>
 
-          <div className="">
+          <div className=" relative">
+            <button
+              onClick={slidePrev}
+              className="absolute top-0 left-0 h-[60%] lg:hidden  z-50"
+            >
+              <LeftArrow2SVG width="32px" height="32px" fillColor="#565C61" />
+            </button>
+
+            <button
+              onClick={slideNext}
+              className="absolute top-0 right-0 h-[60%] lg:hidden  z-50"
+            >
+              <RightArrow2SVG width="32px" height="32px" fillColor="#565C61" />
+            </button>
             <Slider ref={sliderRef} {...settings} className="">
               {projects.map((item, index) => (
                 <div key={index} className="">
                   <div className="grid grid-cols-12 lg:gap-6 px-1 items-center ">
-                    <div className="lg:col-span-6 col-span-12 flex justify-center lg:order-2 order-1 relative">
+                    <div className="lg:col-span-6 col-span-12 flex justify-center lg:order-2 order-1 ">
                       <div
                         className="aspect-square lg:block hidden "
                         style={{
@@ -143,28 +156,6 @@ const ProjectsSlider = () => {
                           className=""
                         />
                       </div>
-
-                      <button
-                        onClick={slidePrev}
-                        className="absolute top-0 left-0 h-full lg:hidden"
-                      >
-                        <LeftArrow2SVG
-                          width="32px"
-                          height="32px"
-                          fillColor="#565C61"
-                        />
-                      </button>
-
-                      <button
-                        onClick={slideNext}
-                        className=" absolute top-0 right-0 h-full lg:hidden"
-                      >
-                        <RightArrow2SVG
-                          width="32px"
-                          height="32px"
-                          fillColor="#565C61"
-                        />
-                      </button>
                     </div>
 
                     <div className="lg:col-span-6 col-span-12 lg:order-1 order-2 ">

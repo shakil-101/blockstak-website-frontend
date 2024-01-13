@@ -134,6 +134,8 @@ const FeedbackSlider = () => {
                       height={90}
                       alt={`${item.name}`}
                       className="rounded-full"
+                      placeholder="blur"
+                      blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
                     />
                   </div>
                   <div>

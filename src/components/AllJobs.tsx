@@ -9,6 +9,7 @@ import { useDetectClickOutside } from "react-detect-click-outside";
 import DownArrowSVG from "./SVG/DownArrowSVG";
 import useSWR from "swr";
 import { toast } from "react-toastify";
+import JobsSkeleton from "./skeletons/JobsSkeleton";
 
 const AllJobs = () => {
   const [activeCategory, setActiveCategory] = useState<String>("");
@@ -33,6 +34,7 @@ const AllJobs = () => {
   };
 
   const [jobList, setJobList] = useState<jobListType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [displayJobs, setDisplayJobs] = useState<jobListType[]>([]);
 
@@ -54,6 +56,7 @@ const AllJobs = () => {
   });
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs`
@@ -67,6 +70,7 @@ const AllJobs = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -238,7 +242,7 @@ const AllJobs = () => {
                   e.stopPropagation();
                   setLocationOpened(!locationOpened);
                 }}
-                className="lg:w-[165px] w-[115px] lg:h-[59px] h-[40px] px-3 cursor-pointer select-none flex items-center justify-between rounded-full border bg-primaryDark hover:bg-tertiaryDark border-primaryBorder "
+                className="lg:w-[165px] w-[115px] lg:h-[59px] h-[40px] px-4 cursor-pointer select-none flex items-center justify-between rounded-full border bg-primaryDark hover:bg-tertiaryDark border-primaryBorder "
               >
                 <p className="lg:text-base sm:text-[14px] text-[12px]">
                   {selectedLocation ? selectedLocation : "Location"}
@@ -258,7 +262,7 @@ const AllJobs = () => {
                     setSelectedLocation("");
                     setLocationOpened(!locationOpened);
                   }}
-                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark  px-5"
+                  className="lg:text-base sm:text-[14px] text-[12px] cursor-pointer py-2 hover:bg-primaryDark px-5"
                 >
                   Location
                 </div>
@@ -287,76 +291,86 @@ const AllJobs = () => {
 
         {/* ====== jobs ======== */}
         <div className="">
-          {displayJobs.map((item, index) => (
-            <Link key={index} href={`jobs/${item.id}`}>
-              <div
-                className={`${
-                  index === 0 ? "border-y" : "border-b"
-                }  relative border-secondaryBorder group lg:py-16 py-8`}
-              >
-                <div className="container grid grid-cols-12 lg:gap-16 lg:gap-y-0 gap-y-6 ">
-                  <div className="lg:col-span-3 col-span-12 flex lg:justify-end ">
-                    <div className="relative overflow-hidden rounded ">
-                      <Image
-                        src={`${
-                          item.url
-                            ? `${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`
-                            : "/job1.png"
-                        }`}
-                        width={360}
-                        height={360}
-                        alt={`${item.designation}`}
-                        className="rounded"
-                      />
+          {loading ? (
+            <div>
+              <JobsSkeleton />
+            </div>
+          ) : (
+            <div>
+              {displayJobs.map((item, index) => (
+                <Link key={index} href={`jobs/${item.id}`}>
+                  <div
+                    className={`${
+                      index === 0 ? "border-y" : "border-b"
+                    }  relative border-secondaryBorder group lg:py-16 py-8`}
+                  >
+                    <div className="container grid grid-cols-12 lg:gap-16 lg:gap-y-0 gap-y-6 ">
+                      <div className="lg:col-span-3 col-span-12 flex lg:justify-end ">
+                        <div className="relative overflow-hidden rounded ">
+                          <Image
+                            src={`${
+                              item.url
+                                ? `${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`
+                                : "/job1.png"
+                            }`}
+                            width={360}
+                            height={360}
+                            alt={`${item.designation}`}
+                            className="rounded"
+                          />
 
-                      <div className="absolute top-0 right-0 h-full w-full opacity-0 group-hover:opacity-100 duration-300 bg-gradient-to-tr from-transparent via-transparent to-[#6b45e67c]"></div>
-                    </div>
-                  </div>
-                  <div className="lg:col-span-9 col-span-12 ">
-                    <div className="max-w-[625px] flex flex-col justify-between  h-full">
-                      <div className="">
-                        <h1 className="text-[32px] font-bold mb-6 ">
-                          {item.designation}
-                        </h1>
-                        <p className="text-xl font-medium text-neutralBase ">
-                          {item.shortDescription}
-                        </p>
+                          <div className="absolute top-0 right-0 h-full w-full opacity-0 group-hover:opacity-100 duration-300 bg-gradient-to-tr from-transparent via-transparent to-[#6b45e67c]"></div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3 lg:pt-0 pt-6">
-                        <LocationSVG />
-                        <p className="text-lg font-normal">{item.address}</p>
+                      <div className="lg:col-span-9 col-span-12 ">
+                        <div className="max-w-[625px] flex flex-col justify-between  h-full">
+                          <div className="">
+                            <h1 className="text-[32px] font-bold mb-6 ">
+                              {item.designation}
+                            </h1>
+                            <p className="text-xl font-medium text-neutralBase ">
+                              {item.shortDescription}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-3 lg:pt-0 pt-6">
+                            <LocationSVG />
+                            <p className="text-lg font-normal">
+                              {item.address}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="lg:block hidden">
+                      <div className="absolute top-0 right-0 h-full w-[105px] duration-300 flex items-center justify-center overflow-hidden">
+                        <div className="z-[100]">
+                          <RightArrowSVG
+                            width="28px"
+                            height="28px"
+                            fillColor="#F4F4F4"
+                          />
+                        </div>
+                        <div className="absolute top-0 right-0 h-full w-0 group-hover:w-full duration-300  bg-[#6b45e6] z-0"></div>
+                      </div>
+                    </div>
+
+                    <div className="lg:hidden block mt-12">
+                      <div className="h-full gap-4 hover:gap-6 duration-300 flex items-center justify-center ">
+                        <p className="font-medium ">Apply Now</p>
+
+                        <RightArrowSVG
+                          width="28px"
+                          height="28px"
+                          fillColor="#F4F4F4"
+                        />
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="lg:block hidden">
-                  <div className="absolute top-0 right-0 h-full w-[105px] duration-300 flex items-center justify-center overflow-hidden">
-                    <div className="z-[100]">
-                      <RightArrowSVG
-                        width="28px"
-                        height="28px"
-                        fillColor="#F4F4F4"
-                      />
-                    </div>
-                    <div className="absolute top-0 right-0 h-full w-0 group-hover:w-full duration-300  bg-[#6b45e6] z-0"></div>
-                  </div>
-                </div>
-
-                <div className="lg:hidden block mt-12">
-                  <div className="h-full gap-4 hover:gap-6 duration-300 flex items-center justify-center ">
-                    <p className="font-medium ">Apply Now</p>
-
-                    <RightArrowSVG
-                      width="28px"
-                      height="28px"
-                      fillColor="#F4F4F4"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

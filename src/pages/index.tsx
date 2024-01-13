@@ -29,7 +29,7 @@ export default function Home() {
       <FeedbackSlider />
       <ProjectsSlider />
       {/* <Projects /> */}
-      <Blogs />
+      {/* <Blogs /> */}
       <Locations />
       {/* <ContactForm /> */}
     </div>
