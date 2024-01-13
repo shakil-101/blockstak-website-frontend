@@ -48,9 +48,7 @@ const JobDetails = () => {
   const fetchData = async (jobId: any) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/${jobId}`
-      );
+      const response = await fetch(`${process.env.API_URL}/api/jobs/${jobId}`);
       // if (!response.ok) {
       //   toast.error("Network response was not ok");
       // }

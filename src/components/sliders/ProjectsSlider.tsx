@@ -73,9 +73,7 @@ const ProjectsSlider = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/our-works`
-      );
+      const response = await fetch(`${process.env.API_URL}/api/our-works`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -133,7 +131,7 @@ const ProjectsSlider = () => {
                         }}
                       >
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
+                          src={`${process.env.API_URL}${item.url}`}
                           layout="fill"
                           style={{ objectFit: "contain" }}
                           alt={item.title}
@@ -149,7 +147,7 @@ const ProjectsSlider = () => {
                         }}
                       >
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
+                          src={`${process.env.API_URL}${item.url}`}
                           layout="fill"
                           style={{ objectFit: "contain" }}
                           alt={item.title}

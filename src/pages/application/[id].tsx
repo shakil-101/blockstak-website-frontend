@@ -86,9 +86,7 @@ const Application = () => {
 
   const fetchData = async (jobId: any) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/${jobId}`
-      );
+      const response = await fetch(`${process.env.API_URL}/api/jobs/${jobId}`);
       // if (!response.ok) {
       //   toast.error("Network response was not ok");
       // }
@@ -113,7 +111,7 @@ const Application = () => {
         formData.append("file", selectedFile ? selectedFile : "");
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications`,
+          `${process.env.API_URL}/api/applications`,
           {
             method: "POST",
             body: formData,

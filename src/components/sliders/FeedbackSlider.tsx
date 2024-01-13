@@ -85,9 +85,7 @@ const FeedbackSlider = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/clients`
-      );
+      const response = await fetch(`${process.env.API_URL}/api/clients`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -129,13 +127,13 @@ const FeedbackSlider = () => {
                 <div className="mx-auto lg:w-fit flex items-center gap-8 lg:pt-16 pt-8">
                   <div className="lg:block hidden">
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
+                      src={`${process.env.API_URL}${item.url}`}
                       width={90}
                       height={90}
                       alt={`${item.name}`}
                       className="rounded-full"
                       placeholder="blur"
-                      blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`}
+                      blurDataURL={`${process.env.API_URL}${item.url}`}
                     />
                   </div>
                   <div>
