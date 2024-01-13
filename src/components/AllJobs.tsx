@@ -61,9 +61,9 @@ const AllJobs = () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs`
       );
-      if (!response.ok) {
-        toast.error("Network response was not ok");
-      }
+      // if (!response.ok) {
+      //   toast.error("Network response was not ok");
+      // }
       const data = await response.json();
       console.log("fetch: ", data.docs);
       setJobList(data.docs);
