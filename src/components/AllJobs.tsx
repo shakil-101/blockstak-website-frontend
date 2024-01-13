@@ -56,6 +56,8 @@ const AllJobs = () => {
   });
 
   const fetchData = async () => {
+    console.log("process.env.API_URL--", process.env.API_URL);
+
     setLoading(true);
     try {
       const response = await fetch(`${process.env.API_URL}/api/jobs`);
