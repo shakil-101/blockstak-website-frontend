@@ -67,7 +67,6 @@ const ProjectsSlider = () => {
         console.log("res error", response);
         // toast.error("Network response was not ok");
       } else {
-        console.log("fetch: ", data.docs);
         setProjects(data.docs);
       }
       console.log("fetch: ", data.docs);
@@ -81,7 +80,7 @@ const ProjectsSlider = () => {
   }, []);
 
   return (
-    <div className="lg:py-20 py-10 ">
+    <div id="products" className="lg:py-20 py-10 ">
       <div className="container">
         <div className="">
           <h1

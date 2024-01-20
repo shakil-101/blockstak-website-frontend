@@ -65,7 +65,6 @@ const FeedbackSlider = () => {
         console.log("res error", response);
         // toast.error("Network response was not ok");
       } else {
-        console.log("fetch: ", data.docs);
         setFeedbacks(data.docs);
       }
       console.log("fetch: ", data.docs);

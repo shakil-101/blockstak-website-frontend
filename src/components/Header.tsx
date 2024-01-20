@@ -110,7 +110,7 @@ const Header = () => {
                 </div>
 
                 <div>
-                  <Link href={`/`}>
+                  <Link href={`/#products`}>
                     <button className="text-white hover:text-primaryLight text-xl font-medium duration-200">
                       Products
                     </button>
