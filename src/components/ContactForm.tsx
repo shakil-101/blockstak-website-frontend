@@ -23,7 +23,7 @@ const ContactForm = () => {
       console.log("req data --: ", formData);
 
       const response = await fetch(
-        `${process.env.API_URL}/api/contact-messages`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-messages`,
         {
           method: "POST",
           body: JSON.stringify(formData),

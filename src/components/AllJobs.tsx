@@ -56,11 +56,13 @@ const AllJobs = () => {
   });
 
   const fetchData = async () => {
-    console.log("process.env.API_URL--", process.env.API_URL);
+    console.log("process.env.API_URL--", process.env.NEXT_PUBLIC_BASE_URL);
 
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.API_URL}/api/jobs`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs`
+      );
       // if (!response.ok) {
       //   toast.error("Network response was not ok");
       // }
@@ -310,7 +312,7 @@ const AllJobs = () => {
                           <Image
                             src={`${
                               item.url
-                                ? `${process.env.API_URL}${item.url}`
+                                ? `${process.env.NEXT_PUBLIC_BASE_URL}${item.url}`
                                 : "/job1.png"
                             }`}
                             width={360}
