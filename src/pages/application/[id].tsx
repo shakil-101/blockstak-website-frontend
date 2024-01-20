@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { formatDeadline } from "../../../utils/momentFormatter";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const Application = () => {
   const router = useRouter();
@@ -46,6 +47,7 @@ const Application = () => {
   const [selectedFile, setSelectedFile] = useState<File>();
 
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<detailsType>();
 
   const importImage = () => {
@@ -104,6 +106,7 @@ const Application = () => {
     e.preventDefault();
     if (selectedFile) {
       try {
+        setLoading(true);
         const formData = new FormData();
         formData.append("firstName", inputData.firstName);
         formData.append("lastName", inputData.lastName);
@@ -137,6 +140,7 @@ const Application = () => {
           });
           setSelectedFile(undefined);
         }
+        setLoading(false);
       } catch (error: any) {
         console.log("Error fetching data:", error);
       }
@@ -153,6 +157,19 @@ const Application = () => {
 
   return (
     <div className="bg-tertiaryDark py-[70px]">
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full bg-primaryDark/50 backdrop-blur-[1px] z-[100] flex items-center justify-center ">
+          <div className="">
+            <Image
+              src={`/loading.svg`}
+              width={150}
+              height={150}
+              alt={"loader"}
+              className=""
+            />
+          </div>
+        </div>
+      )}
       <div className="container">
         <h1 className="lg:text-[32px] text-2xl font-medium mb-2 ">
           Title: {details?.designation}
