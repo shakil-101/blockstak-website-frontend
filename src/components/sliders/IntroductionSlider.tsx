@@ -37,29 +37,7 @@ const IntroductionSlider = () => {
   };
   const sliderRef = useRef<Slider>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [feedbacks, setFeedbacks] = useState<feedBackType[]>([
-    {
-      title: "We build MVPs for Silicon Valley startups.",
-      shortDescription:
-        "We're a team of experts who help Silicon Valley startups create Minimum Viable Products (MVPs) that allow them to test their ideas quickly and inexpensively. Our developers and designers work closely with founders to build functional, visually appealing, and user-friendly MVPs using the latest technologies and agile methodologies. ",
-      category: "Product Development",
-      image: "/introSlider1.svg",
-    },
-    {
-      title: "We make useful AI-based applications.",
-      shortDescription:
-        "We invest our time into state-of-the-art AI technologies and create applications with real-life touchpoints. We want to take the very best of Artificial Intelligence and put it to programs that help humans excel at their tasks and decision-making.",
-      category: "Artificial Intelligence",
-      image: "/introSlider2.svg",
-    },
-    {
-      title: "We are exploring the future of Data.",
-      shortDescription:
-        "At our core, we're a team of passionate blockchain enthusiasts who are committed to exploring the future of this revolutionary technology. We're constantly researching new use cases and applications for blockchain, and we're always eager to collaborate with other innovators in the space.",
-      category: "Data Solutions",
-      image: "/introSlider3.svg",
-    },
-  ]);
+  const [feedbacks, setFeedbacks] = useState<feedBackType[]>([]);
 
   const goToSlide = (index: number) => {
     if (sliderRef.current) {

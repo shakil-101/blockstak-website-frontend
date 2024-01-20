@@ -29,36 +29,7 @@ const FeedbackSlider = () => {
     designation: string;
     url: string;
   };
-  const [feedbacks, setFeedbacks] = useState<feedBackType[]>([
-    {
-      feedback:
-        "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor",
-      name: "Alak Deb",
-      designation: "Founder of Stealth Start-up",
-      url: "/user.png",
-    },
-    {
-      feedback:
-        "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process.",
-      name: "Nayem Deb",
-      designation: "Founder of Stealth Start-up",
-      url: "/user.png",
-    },
-    {
-      feedback:
-        "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor",
-      name: "Asif Deb",
-      designation: "Founder of Stealth Start-up",
-      url: "/user.png",
-    },
-    {
-      feedback:
-        "Blockstak has really made my life easy by taking on a complex project like Drio and transforming my dream project into a beautiful product. They were very helpful throughout the entire process.",
-      name: "Zahid Deb",
-      designation: "Founder of Stealth Start-up",
-      url: "/user.png",
-    },
-  ]);
+  const [feedbacks, setFeedbacks] = useState<feedBackType[]>([]);
 
   const settings = {
     dots: false,

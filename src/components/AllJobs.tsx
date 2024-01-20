@@ -80,9 +80,6 @@ const AllJobs = () => {
   }, []);
 
   useEffect(() => {
-    console.log({ activeCategory });
-    console.log({ selectedLocation });
-
     if (activeCategory && !selectedLocation) {
       const newArray = jobList.filter((job) => {
         return job.category === activeCategory;

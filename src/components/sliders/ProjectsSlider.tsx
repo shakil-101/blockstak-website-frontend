@@ -43,22 +43,7 @@ const ProjectsSlider = () => {
   };
   const sliderRef = useRef<Slider>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [projects, setProjects] = useState<projectsType[]>([
-    {
-      title: "Good Days",
-      shortDescription:
-        "Lorem ipsum dolor sit amet consectetur. Ac nec sem et lacus parturient viverra fermentum. Id purus adipiscing sed enim euismod ultrices odio ornare.",
-
-      url: "/project1.png",
-    },
-    {
-      title: "Good Days",
-      shortDescription:
-        "Lorem ipsum dolor sit amet consectetur. Ac nec sem et lacus parturient viverra fermentum. Id purus adipiscing sed enim euismod ultrices odio ornare.",
-
-      url: "/project1.png",
-    },
-  ]);
+  const [projects, setProjects] = useState<projectsType[]>([]);
 
   const slideNext = () => {
     if (sliderRef.current) {
