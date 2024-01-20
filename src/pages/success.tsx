@@ -17,7 +17,7 @@ const Success = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="container flex items-center justify-center py-20 ">
         <Lottie
           className={`${

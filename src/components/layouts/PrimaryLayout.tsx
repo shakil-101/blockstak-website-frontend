@@ -12,8 +12,10 @@ const poppins = Poppins({
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 const PrimaryLayout = ({ children }: any) => {
+  const router = useRouter();
   return (
     <div
       className={`bg-primaryDark min-h-screen text-primaryWhite ${poppins.className} flex flex-col justify-between`}
@@ -21,7 +23,7 @@ const PrimaryLayout = ({ children }: any) => {
       <ToastContainer position="top-center" />
       <Header />
       <main className="pt-[140px] ">{children}</main>
-      <Footer />
+      {router.pathname.includes("success") ? <div></div> : <Footer />}
     </div>
   );
 };
