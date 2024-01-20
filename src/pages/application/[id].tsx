@@ -157,16 +157,29 @@ const Application = () => {
 
   return (
     <div className="bg-tertiaryDark py-[70px]">
-      {loading && (
+      {!loading && (
         <div className="fixed top-0 left-0 w-full h-full bg-primaryDark/50 backdrop-blur-[1px] z-[100] flex items-center justify-center ">
           <div className="">
-            <Image
+            {/* <Image
               src={`/loading.svg`}
               width={150}
               height={150}
               alt={"loader"}
               className=""
-            />
+            /> */}
+
+            <div className="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            {/* <span className="loader"></span> */}
           </div>
         </div>
       )}
